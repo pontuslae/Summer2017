@@ -46,10 +46,14 @@ import java.util.ArrayList;
 public class GUIfx extends Application {
 
 	TextField username;
+	TextField username2;
 	Stage stage;
 	GridPane grid;
+	boolean messageView = false;
+	String userName = "";
+	boolean debug = true;
 
-	ArrayList messages = new ArrayList();
+	ArrayList<String> messages = new ArrayList<>();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -79,32 +83,47 @@ public class GUIfx extends Application {
 	}
 
 	private void eventFilter(KeyEvent e){
-		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
 
-			// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
-			// TODO: 12/06/2017 Open up a new scene with the message layout.
-			if (validUserName(username.getText()))
+
+		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
+			if (validUserName(username.getText())){
+				userName = username.getText();
+
+				if (debug)
+					System.out.println(userName);
+
 				setMessageLayout();
+			}
 		}
 
 	}
-	
+
 	private void sendMessage(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
 
+			debugPrint("Send message: " + username2.getText());
+
 			if (validMessage(username.getText())){
-				username.setText("");
-				messages.add(username.getText());
+				username2.setText("");
+				messages.add(username2.getText());
 				updateMessageDisplay(grid);
 			}
 		}
 	}
 
+	private void debugPrint(String s) {
+		if (debug)
+			System.out.println(s);
+	}
 
 	/**
 	 * @return if the string is of appropriate length.
 	 */
 	private boolean validUserName(String str) {
+
+		// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
+		// TODO: 12/06/2017 double check with SQL server if unique username.
+
 		return (str.length() < 16) && (str.length() > 4);
 	}
 	
@@ -113,16 +132,21 @@ public class GUIfx extends Application {
 	}
 
 	void setMessageLayout(){
+		if (debug)
+			System.out.println("Setting message layout");
+
+		messageView = true;
+
+		stage.setTitle("Client - " + userName);
 
 		GridPane grid = getGridPane();
-
 		grid = updateMessageDisplay(grid);
 
-		username = new TextField();
-		grid.add(username, 0, 15);
-		username.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
+		username2 = new TextField();
+		grid.add(username2, 1, 10);
+		username2.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
 
-		Scene scene = new Scene(grid, 300, 475);
+		Scene scene = new Scene(grid, 300, 275);
 		stage.setScene(scene);
 		this.grid = grid;
 	}
@@ -133,17 +157,18 @@ public class GUIfx extends Application {
 		sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 		sp.setHmin(200);
 
-
 		String t = "";
 
 		for (int i = 0; i < messages.size(); i++){
 			t = messages.get(i) + "\n";
-
 		}
+
+		debugPrint(t + "" + messages.size());
+
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
 		sp.setContent(scenetitle);
-		grid.add(sp, 0, 0, 2, 15);
+		grid.add(sp, 0, 0, 2, 7);
 		return grid;
 	}
 
