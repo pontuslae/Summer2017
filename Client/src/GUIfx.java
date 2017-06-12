@@ -29,6 +29,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -40,10 +41,15 @@ import javafx.scene.input.KeyEvent;
 
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 public class GUIfx extends Application {
 
 	TextField username;
+	Stage stage;
+	GridPane grid;
+
+	ArrayList messages = new ArrayList();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -53,14 +59,9 @@ public class GUIfx extends Application {
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Client");
 
-
-		StackPane root = new StackPane();
-		primaryStage.setScene(new Scene(root, 300, 250));
 		primaryStage.show();
 
 		GridPane grid = getGridPane();
-		Scene scene = new Scene(grid, 300, 275);
-		primaryStage.setScene(scene);
 
 		Text scenetitle = new Text("Welcome");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -70,6 +71,11 @@ public class GUIfx extends Application {
 		grid.add(username, 1, 1);
 		username.addEventFilter(KeyEvent.KEY_TYPED, this::eventFilter);
 
+		Scene scene = new Scene(grid, 300, 275);
+		primaryStage.setScene(scene);
+		stage = primaryStage;
+		this.grid = grid;
+
 	}
 
 	private void eventFilter(KeyEvent e){
@@ -77,13 +83,68 @@ public class GUIfx extends Application {
 
 			// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
 			// TODO: 12/06/2017 Open up a new scene with the message layout.
-			System.out.println("wow");
+			if (validUserName(username.getText()))
+				setMessageLayout();
 		}
 
+	}
+	
+	private void sendMessage(KeyEvent e){
+		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
+
+			if (validMessage(username.getText())){
+				username.setText("");
+				messages.add(username.getText());
+				updateMessageDisplay(grid);
+			}
+		}
+	}
+
+
+	/**
+	 * @return if the string is of appropriate length.
+	 */
+	private boolean validUserName(String str) {
+		return (str.length() < 16) && (str.length() > 4);
+	}
+	
+	private boolean validMessage(String str) {
+		return true; // TODO: 12/06/2017 improve this 
 	}
 
 	void setMessageLayout(){
 
+		GridPane grid = getGridPane();
+
+		grid = updateMessageDisplay(grid);
+
+		username = new TextField();
+		grid.add(username, 0, 15);
+		username.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
+
+		Scene scene = new Scene(grid, 300, 475);
+		stage.setScene(scene);
+		this.grid = grid;
+	}
+
+	GridPane updateMessageDisplay(GridPane grid) {
+		ScrollPane sp = new ScrollPane();
+		sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+		sp.setHmin(200);
+
+
+		String t = "";
+
+		for (int i = 0; i < messages.size(); i++){
+			t = messages.get(i) + "\n";
+
+		}
+		Text scenetitle = new Text(t);
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
+		sp.setContent(scenetitle);
+		grid.add(sp, 0, 0, 2, 15);
+		return grid;
 	}
 
 	public static GridPane getGridPane(){
