@@ -52,20 +52,9 @@ public class GUIfx extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Client");
-		Button btn = new Button();
-		btn.setText("Send");
-		btn.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent event) {
-				if (event.getSource() == btn){
-					System.out.println("Sending message");
-				}
-			}
-		});
 
 		StackPane root = new StackPane();
-		root.getChildren().add(btn);
 		primaryStage.setScene(new Scene(root, 300, 250));
 		primaryStage.show();
 
@@ -75,10 +64,7 @@ public class GUIfx extends Application {
 
 		Text scenetitle = new Text("Welcome");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 2, 0, 2, 1);
-
-		Label userName = new Label("User Name:");
-		grid.add(userName, 0, 1);
+		grid.add(scenetitle, 1, 0, 2, 1);
 
 		username = new TextField();
 		grid.add(username, 1, 1);
@@ -93,6 +79,10 @@ public class GUIfx extends Application {
 			// TODO: 12/06/2017 Open up a new scene with the message layout.
 			System.out.println("wow");
 		}
+
+	}
+
+	void setMessageLayout(){
 
 	}
 
