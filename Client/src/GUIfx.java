@@ -39,8 +39,11 @@ import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class GUIfx extends Application {
+
+	TextField username;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -77,21 +80,19 @@ public class GUIfx extends Application {
 		Label userName = new Label("User Name:");
 		grid.add(userName, 0, 1);
 
-		TextField userTextField = new TextField();
-		grid.add(userTextField, 1, 1);
-		userTextField.setOnKeyTyped(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if ((int) (event.getCharacter().charAt(0)) == 13){ // New line
+		username = new TextField();
+		grid.add(username, 1, 1);
+		username.addEventFilter(KeyEvent.KEY_TYPED, this::eventFilter);
 
-					// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid. 
-					// TODO: 12/06/2017 Open up a new scene with the message layout. 
-					System.out.println("wow");
-				}
+	}
 
-			}
-		});
+	private void eventFilter(KeyEvent e){
+		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
 
+			// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
+			// TODO: 12/06/2017 Open up a new scene with the message layout.
+			System.out.println("wow");
+		}
 
 	}
 
