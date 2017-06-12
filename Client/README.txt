@@ -1,0 +1,1 @@
+This folder holds all components the Client is composed of.
