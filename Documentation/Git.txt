@@ -1,0 +1,18 @@
+Standards this Repository follows regarding git:
+
+All commits should use:
+	Simple Present when named.
+	Not contain more content then half a sentence could describe.
+	Not contain more than 50 new lines of code, unless imported.
+
+
+All Branches:
+	All branches should have one clear goal.
+	When working on bigger features they should be split up.
+	Example:
+		master ->
+			huge feature ->
+				reasonably sized feature -> 
+					A addition1 -|
+	Only branches named with A<blackspace><name>
+	should be unstable. All other branches must be working.
