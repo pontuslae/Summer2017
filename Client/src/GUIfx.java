@@ -53,8 +53,9 @@ public class GUIfx extends Application {
 	String userName = "";
 	boolean debug = true;
 	ScrollPane sp;
+	final int NEW_LINE = 13;
 
-	ArrayList<String> messages = new ArrayList<>();
+	ArrayList<Message> messages = new ArrayList<>();
 
 	public static void main(String[] args) {
 		launch(args);
@@ -84,9 +85,7 @@ public class GUIfx extends Application {
 	}
 
 	private void eventFilter(KeyEvent e){
-
-
-		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
+		if ((int) (e.getCharacter().charAt(0)) == NEW_LINE){ // New line
 			if (validUserName(username.getText())){
 				userName = username.getText();
 
@@ -100,12 +99,13 @@ public class GUIfx extends Application {
 	}
 
 	private void sendMessage(KeyEvent e){
-		if ((int) (e.getCharacter().charAt(0)) == 13){ // New line
+		if ((int) (e.getCharacter().charAt(0)) == NEW_LINE){ // New line
 
-			debugPrint("Send message: " + username2.getText());
+			debugPrint("Send Message: " + username2.getText());
 
 			if (validMessage(username.getText())){
-				messages.add(username2.getText());
+
+				messages.add(new Message(userName, username2.getText()));
 				username2.setText("");
 				displayMessages();
 			}
@@ -133,7 +133,7 @@ public class GUIfx extends Application {
 	}
 
 	void setMessageLayout(){
-		debugPrint("Setting message layout");
+		debugPrint("Setting Message layout");
 
 		messageView = true;
 
@@ -156,8 +156,8 @@ public class GUIfx extends Application {
 	private void displayMessages(){
 		String t = "";
 
-		for (int i = 0; i < messages.size(); i++){
-			t = messages.get(i) + "\n";
+		for (Message m: messages){
+			t += m.toString() + "\n";
 		}
 
 		debugPrint(t + "" + messages.size());
