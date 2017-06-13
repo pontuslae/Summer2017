@@ -52,6 +52,7 @@ public class GUIfx extends Application {
 	boolean messageView = false;
 	String userName = "";
 	boolean debug = true;
+	ScrollPane sp;
 
 	ArrayList<String> messages = new ArrayList<>();
 
@@ -104,9 +105,9 @@ public class GUIfx extends Application {
 			debugPrint("Send message: " + username2.getText());
 
 			if (validMessage(username.getText())){
-				username2.setText("");
 				messages.add(username2.getText());
-				updateMessageDisplay(grid);
+				username2.setText("");
+				displayMessages();
 			}
 		}
 	}
@@ -132,8 +133,7 @@ public class GUIfx extends Application {
 	}
 
 	void setMessageLayout(){
-		if (debug)
-			System.out.println("Setting message layout");
+		debugPrint("Setting message layout");
 
 		messageView = true;
 
@@ -151,12 +151,9 @@ public class GUIfx extends Application {
 		this.grid = grid;
 	}
 
-	GridPane updateMessageDisplay(GridPane grid) {
-		ScrollPane sp = new ScrollPane();
-		sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-		sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-		sp.setHmin(200);
 
+
+	private void displayMessages(){
 		String t = "";
 
 		for (int i = 0; i < messages.size(); i++){
@@ -164,6 +161,24 @@ public class GUIfx extends Application {
 		}
 
 		debugPrint(t + "" + messages.size());
+
+		Text scenetitle = new Text(t);
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
+		sp.setContent(scenetitle);
+
+	}
+
+	GridPane updateMessageDisplay(GridPane grid) {
+		sp = new ScrollPane();
+		sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+		// sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+		sp.setHmin(200);
+
+		String t = "";
+
+		for (int i = 0; i < messages.size(); i++){
+			t = messages.get(i) + "\n";
+		}
 
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
@@ -177,7 +192,8 @@ public class GUIfx extends Application {
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
 		grid.setVgap(10);
-		grid.setPadding(new Insets(25, 25, 25, 25));
+		int pad = 5;
+		grid.setPadding(new Insets(pad,pad,pad,pad));
 		return grid;
 	}
 }
