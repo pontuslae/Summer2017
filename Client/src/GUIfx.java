@@ -156,8 +156,8 @@ public class GUIfx extends Application {
 	private void displayMessages(){
 		String t = "";
 
-		for (int i = 0; i < messages.size(); i++){
-			t += messages.get(i).toString() + "\n";
+		for (Message m: messages){
+			t += m.toString() + "\n";
 		}
 
 		debugPrint(t + "" + messages.size());
