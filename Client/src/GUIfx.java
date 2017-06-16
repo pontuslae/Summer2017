@@ -45,15 +45,15 @@ import java.util.ArrayList;
 
 public class GUIfx extends Application {
 
-	TextField username;
-	TextField username2;
-	Stage stage;
-	GridPane grid;
-	boolean messageView = false;
-	String userName = "";
-	boolean debug = true;
-	ScrollPane sp;
-	final int NEW_LINE = 13;
+	private TextField username;
+	private TextField username2;
+	private Stage stage;
+	private GridPane grid;
+	private boolean messageView = false;
+	private String userName = "";
+	private boolean debug = true;
+	private ScrollPane sp;
+	private final int NEW_LINE = 13;
 
 	ArrayList<Message> messages = new ArrayList<>();
 
@@ -89,8 +89,7 @@ public class GUIfx extends Application {
 			if (validUserName(username.getText())){
 				userName = username.getText();
 
-				if (debug)
-					System.out.println(userName);
+				debugPrint("Username: " + userName);
 
 				setMessageLayout();
 			}
@@ -176,8 +175,8 @@ public class GUIfx extends Application {
 
 		String t = "";
 
-		for (int i = 0; i < messages.size(); i++){
-			t = messages.get(i) + "\n";
+		for (Message mes: messages){
+			t += mes + "\n";
 		}
 
 		Text scenetitle = new Text(t);
