@@ -31,6 +31,8 @@ import javafx.scene.text.FontWeight;
 
 public class Singleton {
 
+	static final int NEW_LINE = 13;
+
 
 	/**
 	 * @return the default font used for none input text.

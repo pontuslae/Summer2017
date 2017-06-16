@@ -23,5 +23,57 @@
 
 package Gui;
 
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+
+
 public class StartLayout {
+
+	TextField inputField;
+	String input;
+
+	public Scene get(){
+		GridPane grid = Singleton.getDefaultGridPane();
+
+		Text scenetitle = new Text("Welcome");
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		grid.add(scenetitle, 1, 0, 2, 1);
+
+		inputField = new TextField();
+		grid.add(inputField, 1, 1);
+		inputField.addEventFilter(KeyEvent.KEY_TYPED, this::inputFieldListener);
+
+		return new Scene(grid, 300, 275);
+	}
+
+	private void inputFieldListener(KeyEvent e){
+		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
+			if (validUserName(username.getText())){
+				userName = username.getText();
+
+				debugPrint("Username: " + userName);
+
+				setMessageLayout();
+			}
+		}
+
+	}
+
+
+	/**
+	 * @return if the string is of appropriate length.
+	 */
+	private boolean validUserName(String str) {
+
+		// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
+		// TODO: 12/06/2017 double check with SQL server if unique username.
+
+		return (str.length() < 16) && (str.length() > 4);
+	}
+
 }
