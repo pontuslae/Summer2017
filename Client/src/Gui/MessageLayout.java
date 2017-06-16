@@ -21,17 +21,8 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class Message {
-	private String poster;
-	private String message;
+package Gui;
 
-	Message(String p, String m){
-		poster = p;
-		message = m;
-	}
 
-	@Override
-	public String toString() {
-		return poster + ": " + message;
-	}
+public class MessageLayout {
 }

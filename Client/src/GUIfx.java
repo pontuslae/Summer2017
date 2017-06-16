@@ -57,10 +57,6 @@ public class GUIfx extends Application {
 
 	ArrayList<Message> messages = new ArrayList<>();
 
-	public static void main(String[] args) {
-		launch(args);
-	}
-
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Client");
