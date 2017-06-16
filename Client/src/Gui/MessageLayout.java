@@ -45,18 +45,24 @@ public class MessageLayout {
 	private ArrayList<Message> messages = new ArrayList<>();
 
 	MessageLayout() {
-		try {
-			throw new Exception("Can't instantiate an empty MessageLayout");
-		} catch (Exception ex) {
-			throw new Error("Unable to throw Exception.");
-		}
-
+		Singleton.deny();
 	}
-
-
 
 	MessageLayout(String un) {
 		this.userName = un;
+	}
+
+	public Scene get(){
+		Singleton.debugPrint("Setting MessageLayout");
+
+		GridPane grid = Singleton.getDefaultGridPane();
+		grid = updateMessageDisplay(grid);
+
+		username2 = new TextField();
+		grid.add(username2, 1, 10);
+		username2.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
+
+		return new Scene(grid, 300, 275);
 	}
 
 	private void sendMessage(KeyEvent e){
@@ -74,23 +80,6 @@ public class MessageLayout {
 
 	private boolean validMessage(String str) {
 		return true; // TODO: 12/06/2017 improve this
-	}
-
-	void setMessageLayout(){
-		Singleton.debugPrint("Setting Gui.Message layout");
-
-		stage.setTitle("Client - " + userName);
-
-		GridPane grid = Singleton.getDefaultGridPane();
-		grid = updateMessageDisplay(grid);
-
-		username2 = new TextField();
-		grid.add(username2, 1, 10);
-		username2.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
-
-		Scene scene = new Scene(grid, 300, 275);
-		stage.setScene(scene);
-		this.grid = grid;
 	}
 
 	private void displayMessages(){

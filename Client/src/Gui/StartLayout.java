@@ -36,6 +36,8 @@ public class StartLayout {
 	TextField inputField;
 	String input;
 
+	StartLayout(){}
+
 	public Scene get(){
 		GridPane grid = Singleton.getDefaultGridPane();
 

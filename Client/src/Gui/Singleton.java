@@ -35,6 +35,13 @@ class Singleton {
 	private static final boolean debug = true;
 
 
+	static void deny(){
+		try {
+			throw new Exception("Can't instantiate an empty MessageLayout");
+		} catch (Exception ex) {
+			throw new Error("Unable to throw Exception.");
+		}
+	}
 
 	/**
 	 * @return the default font used for none input text.
