@@ -22,25 +22,18 @@
 */
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
 
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GUIfx extends Application {
@@ -166,7 +159,6 @@ public class GUIfx extends Application {
 	GridPane updateMessageDisplay(GridPane grid) {
 		sp = new ScrollPane();
 		sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-		// sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 		sp.setHmin(200);
 
 		String t = "";
@@ -176,7 +168,7 @@ public class GUIfx extends Application {
 		}
 
 		Text scenetitle = new Text(t);
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
+		scenetitle.setFont(getDefaultFont());
 		sp.setContent(scenetitle);
 		grid.add(sp, 0, 0, 2, 7);
 		return grid;
@@ -191,4 +183,6 @@ public class GUIfx extends Application {
 		grid.setPadding(new Insets(pad,pad,pad,pad));
 		return grid;
 	}
+
+
 }
