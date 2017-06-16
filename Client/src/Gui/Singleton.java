@@ -53,7 +53,7 @@ class Singleton {
 		return grid;
 	}
 
-	void debugPrint(String s) {
+	static void debugPrint(String s) {
 		// TODO: 15/06/2017 expand to introduce proper logs. 
 		if (debug)
 			System.out.println(s);

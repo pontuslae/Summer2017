@@ -31,7 +31,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-
 public class StartLayout {
 
 	TextField inputField;
@@ -53,12 +52,12 @@ public class StartLayout {
 
 	private void inputFieldListener(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
-			if (validUserName(username.getText())){
-				userName = username.getText();
+			if (validUserName(inputField.getText())){
+				input = inputField.getText();
 
-				debugPrint("Username: " + userName);
+				Singleton.debugPrint("Username: " + input);
 
-				setMessageLayout();
+				// TODO: 15/06/2017 Notify MainGui that this action has been performed.
 			}
 		}
 
