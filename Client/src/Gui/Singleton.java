@@ -29,19 +29,21 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class Singleton {
+class Singleton {
 
 	static final int NEW_LINE = 13;
+	private static final boolean debug = true;
+
 
 
 	/**
 	 * @return the default font used for none input text.
 	 */
-	public static Font getDefaultFont(){
+	static Font getDefaultFont(){
 		return Font.font("Tahoma", FontWeight.NORMAL, 16);
 	}
 
-	public static GridPane getDefaultGridPane(){
+	static GridPane getDefaultGridPane(){
 		GridPane grid = new GridPane();
 		grid.setAlignment(Pos.CENTER);
 		grid.setHgap(10);
@@ -51,6 +53,10 @@ public class Singleton {
 		return grid;
 	}
 
-
+	void debugPrint(String s) {
+		// TODO: 15/06/2017 expand to introduce proper logs. 
+		if (debug)
+			System.out.println(s);
+	}
 
 }
