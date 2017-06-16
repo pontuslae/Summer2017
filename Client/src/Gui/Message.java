@@ -21,17 +21,17 @@ package Gui;/*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class Message {
+class Message {
 	private String poster;
 	private String message;
 
 	Message(String p, String m){
-		poster = p;
-		message = m;
+		this.poster = p;
+		this.message = m;
 	}
 
 	@Override
 	public String toString() {
-		return poster + ": " + message;
+		return this.poster + ": " + this.message;
 	}
 }

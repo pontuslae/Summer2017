@@ -32,7 +32,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import java.util.ArrayList;
 
