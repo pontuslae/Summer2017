@@ -23,6 +23,9 @@
 
 package Gui;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -32,8 +35,18 @@ public class Singleton {
 	/**
 	 * @return the default font used for none input text.
 	 */
-	public Font getDefaultFont(){
+	public static Font getDefaultFont(){
 		return Font.font("Tahoma", FontWeight.NORMAL, 16);
+	}
+
+	public static GridPane getDefaultGridPane(){
+		GridPane grid = new GridPane();
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		int pad = 5;
+		grid.setPadding(new Insets(pad,pad,pad,pad));
+		return grid;
 	}
 
 
