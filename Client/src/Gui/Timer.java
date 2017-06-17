@@ -23,4 +23,33 @@ package Gui;/*
 */
 
 public class Timer {
+	long start;
+	long end;
+	int expected;
+
+	public Timer() {
+		this.start(300);
+	}
+
+	public Timer(int expected) {
+		this.start(expected);
+	}
+
+	public void start(int expected) {
+		this.expected = expected;
+		this.start = System.currentTimeMillis();
+	}
+
+	public void stop() {
+		this.end = System.currentTimeMillis();
+	}
+
+
+	/**
+	 *
+	 * @return true if the the start time plus the expected time is less than the end time.
+	 */
+	public boolean status() {
+		return (this.start + this.expected) < this.end;
+	}
 }
