@@ -23,12 +23,7 @@
 
 import Gui.StartLayout;
 import javafx.application.Application;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -39,11 +34,12 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage.setTitle("Client");
-
-		primaryStage.show();
+		primaryStage.centerOnScreen();
 
 		StartLayout sl = new StartLayout();
 		primaryStage.setScene(sl.get());
+		primaryStage.show();
+
 	}
 }
 

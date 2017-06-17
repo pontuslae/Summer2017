@@ -48,17 +48,17 @@ public class StartLayout {
 		inputField = new TextField();
 		grid.add(inputField, 1, 1);
 		inputField.addEventFilter(KeyEvent.KEY_TYPED, this::inputFieldListener);
-
 		return new Scene(grid, 300, 275);
 	}
 
 	private void inputFieldListener(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 			if (validUserName(inputField.getText())){
+				Singleton.debugPrint("StartLayout -> MessageLayout");
 				input = inputField.getText();
 
-				Singleton.debugPrint("Username: " + input);
-
+				MessageLayout ml = new MessageLayout(input);
+				ml.get();
 				// TODO: 15/06/2017 Notify MainGui that this action has been performed.
 			}
 		}
