@@ -22,6 +22,7 @@
 */
 
 import Gui.StartLayout;
+import Gui.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -33,6 +34,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
+		Gui.Timer timer = new Gui.Timer(1000);
 		primaryStage.setTitle("Client");
 		primaryStage.centerOnScreen();
 
@@ -40,6 +42,8 @@ public class Main extends Application {
 		primaryStage.setScene(sl.get());
 		primaryStage.show();
 
+		timer.stop();
+		timer.status("Slow start up");
 	}
 }
 

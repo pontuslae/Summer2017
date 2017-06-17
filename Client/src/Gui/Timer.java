@@ -24,7 +24,7 @@ package Gui;/*
 
 public class Timer {
 	long start;
-	long end;
+	long end = 0;
 	int expected;
 
 	public Timer() {
@@ -40,16 +40,24 @@ public class Timer {
 		this.start = System.currentTimeMillis();
 	}
 
-	public void stop() {
-		this.end = System.currentTimeMillis();
+	public long stop() {
+		return (this.end = System.currentTimeMillis());
 	}
 
+	public long elapse() {
+		return this.end - this.start;
+	}
 
 	/**
-	 *
 	 * @return true if the the start time plus the expected time is less than the end time.
 	 */
 	public boolean status() {
-		return (this.start + this.expected) < this.end;
+		return elapse() > this.expected;
+	}
+
+
+	public void status(String str) {
+		if (this.status())
+			Singleton.debugPrint("TIMER: " + elapse() + "(" + str + ")");
 	}
 }
