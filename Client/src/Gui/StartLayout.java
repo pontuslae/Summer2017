@@ -31,7 +31,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class StartLayout {
+public class StartLayout extends Layout {
 
 	TextField inputField;
 	String input;
