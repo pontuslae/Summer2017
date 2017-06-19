@@ -1,0 +1,66 @@
+A messaging service which sends messages between users.
+
+How it will operate:
+Once the user boots up a client.
+The client will connect to a passthrough server 
+it authenticates the user.
+That server's job is to look at all the available servers,
+It does this by all other servers sending out a 'up-and-running' message
+to the passthrough server every some set of seconds, and then the 
+passthrough server pinging it back. 
+The server is given the users authentication information and opens a 
+listening socket.
+The client is given the server's connection information.
+The client proceeds to connect to the server over TCP/IP.
+The server makes sure the authentication information matches the client
+that just connected.
+The client sends out it's state to the server.
+The server sees if the state matches what is on the database.
+If they do not match the server will send out the new messages for the client
+and sync their states.
+This sync is done by sending out all the messages the client is missing up to
+a cap to not overload any sockets. 
+The client disconnects from the server after the states match.
+
+
+if the client sends out information to the server (sending to another user):
+
+	If the user manages to connect to the server:
+		
+		if the server does not manage to send it to the SQL:
+			Log the issue.
+			Save the message on the local machine.
+			Send it as a BATCH when
+		
+		if the server manage to send it to the SQL:
+			Exit with an 'ok' state and notify the user.
+
+
+	if the user does not manage to connect to the server:
+		Notify the user.
+		Save the message on the local machine and send it 
+		when the user regains connection. 
+
+
+
+
+
+Conversations
+Every conversation is hashed in the database as 
+unix time in mili + (user1+user2...+userN)
+when they are created.
+
+States
+A state is determined from a hash of the last 10 messages sent.
+If there are less than 10 messages the state includes a number at the en
+with the number of messages sent. 
+two Examples:
+(hi!hihow are you?I'm good! Thanks for asking 5)
+
+
+Database
+Conversations - One table for every conversation. It's name is the conversation hash.
+And the content of the table is the messages with: Sending, content, id.
+
+Users - usernames, email, real names, SHA-256 hashed passwords.
+
