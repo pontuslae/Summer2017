@@ -14,5 +14,5 @@ All Branches:
 			huge feature ->
 				reasonably sized feature -> 
 					A addition1 -|
-	Only branches named with A<blackspace><name>
+	Only branches named with A-<name>
 	should be unstable. All other branches must be working.
