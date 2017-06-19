@@ -35,9 +35,9 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class MessageLayout {
+public class MessageLayout extends Layout {
 
-	private TextField username2;
+	private TextField messageField;
 	private String userName = "";
 	private ScrollPane sp;
 
@@ -57,9 +57,9 @@ public class MessageLayout {
 		GridPane grid = Singleton.getDefaultGridPane();
 		grid = updateMessageDisplay(grid);
 
-		username2 = new TextField();
-		grid.add(username2, 1, 10);
-		username2.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
+		messageField = new TextField();
+		grid.add(messageField, 1, 10);
+		messageField.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
 
 		return new Scene(grid, 300, 275);
 	}
@@ -67,11 +67,11 @@ public class MessageLayout {
 	private void sendMessage(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 
-			Singleton.debugPrint("Send Gui.Message: " + username2.getText());
+			Singleton.debugPrint("Send Message: " + messageField.getText());
 
-			if (validMessage(username2.getText())){
-				messages.add(new Message(userName, username2.getText()));
-				username2.setText("");
+			if (validMessage(messageField.getText())){
+				messages.add(new Message(userName, messageField.getText()));
+				messageField.setText("");
 				displayMessages();
 			}
 		}
