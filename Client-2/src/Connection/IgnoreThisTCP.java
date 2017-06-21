@@ -8,9 +8,24 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
-class IgnoreThisTCP {
+class IgnoreThisTCP extends Thread {
 
 	ServerSocket serverSocket;
+
+	public static Thread th;
+
+	public static Thread getInstance() {
+		return th;
+	}
+
+	public void run() {
+		th = this;
+		try {
+			this.serverSocket = new ServerSocket(9005);
+		} catch (IOException ex) {
+			Singleton.debugPrint("Exception was thrown during mocking", ex);
+		}
+	}
 
 	IgnoreThisTCP() {
 
@@ -31,7 +46,7 @@ class IgnoreThisTCP {
 			DataOutputStream outToClient = new DataOutputStream(socket.getOutputStream());
 			String rl = inFromClient.readLine();
 
-			Singleton.debugPrint(rl);
+			Singleton.debugPrint("Received: " + rl + " | Expected: " + receive);
 
 			outToClient.write(send);
 		} catch (IOException ex) {

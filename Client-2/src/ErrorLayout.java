@@ -24,6 +24,7 @@
 
 import External.Singleton;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -54,6 +55,11 @@ public class ErrorLayout implements Layout {
 		Text errorSubText = new Text(errorText);
 		errorSubText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(errorSubText, 1, 0, 2, 7);
+
+		Button goBack = new Button("Go Back");
+		grid.add(goBack, 1, 0, 2, 15);
+
+
 
 		return new Scene(grid, 300, 275);
 	}

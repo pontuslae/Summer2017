@@ -54,6 +54,9 @@ public class Connector {
 		Singleton.debugPrint("Connector: Connected");
 	}
 
+	public void mock() {
+
+	}
 
 	public boolean isConnected() {
 		return this.connected;
@@ -61,9 +64,9 @@ public class Connector {
 
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
-	 * @return
+	 * @return true if the server responded to the users command.
 	 */
-	private boolean ok() {
+	public boolean ok() {
 		int handshake = 0;
 		try {
 			handshake = in.read();
@@ -88,11 +91,21 @@ public class Connector {
 		}
 	}
 
-	private void send(String str) {
+	public void send(String str) {
+		try {
+			this.connect();
+			IgnoreThisTCP
+			out.writeUTF(str);
+
+			done();
+
+		} catch (Exception ex) {
+
+		}
 
 	}
 
-	private String receive() {
+	public String receive() {
 		return "";
 	}
 
