@@ -94,7 +94,12 @@ public class Connector {
 	public void send(String str) {
 		try {
 			this.connect();
-			IgnoreThisTCP
+
+			Thread itt = new IgnoreThisTCP();
+			itt.start();
+			IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
+
+
 			out.writeUTF(str);
 
 			done();

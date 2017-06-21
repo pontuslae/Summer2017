@@ -72,7 +72,7 @@ public class MessageLayout implements Layout {
 
 			if (validMessage(messageField.getText())){
 
-				Main.getConnector().
+				Main.getConnector().send(messageField.getText());
 
 				this.messages.add(new Message(userName, messageField.getText()));
 				messageField.setText("");

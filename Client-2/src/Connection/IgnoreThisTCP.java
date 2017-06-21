@@ -12,9 +12,9 @@ class IgnoreThisTCP extends Thread {
 
 	ServerSocket serverSocket;
 
-	public static Thread th;
+	public static IgnoreThisTCP th;
 
-	public static Thread getInstance() {
+	public static IgnoreThisTCP getInstance() {
 		return th;
 	}
 
@@ -28,7 +28,6 @@ class IgnoreThisTCP extends Thread {
 	}
 
 	IgnoreThisTCP() {
-
 		try {
 			this.serverSocket = new ServerSocket(9005);
 		} catch (IOException ex) {
@@ -37,7 +36,7 @@ class IgnoreThisTCP extends Thread {
 	}
 
 
-	public void mock(String receive, byte send){
+	public void mock(String receive, int send){
 		try {
 			Socket socket = serverSocket.accept();
 
