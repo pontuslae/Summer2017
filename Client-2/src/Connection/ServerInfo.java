@@ -22,7 +22,25 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import sun.net.util.IPAddressUtil;
+
 class ServerInfo {
 
+	private int port = 9005;
+	private String address = "localhost";
+
+	ServerInfo() {}
+
+	ServerInfo(String address) {
+		this.address = address;
+	}
+
+	int getPort() {
+		return this.port;
+	}
+
+	String getAddress() {
+		return this.address;
+	}
 
 }

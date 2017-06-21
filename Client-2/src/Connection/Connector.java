@@ -35,26 +35,44 @@ public class Connector {
 
 	private Socket socket;
 	private boolean connected = false;
+	private BufferedReader in;
+	DataOutputStream out;
+
+	private ServerInfo serverinfo = new ServerInfo();
 
 	private Socket connect() throws Exception {
-		Socket clientSocket = new Socket("localhost", 6789);
+		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
+		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+		this.out = new DataOutputStream(this.socket.getOutputStream());
+		this.connected = true;
 	}
 
 	private boolean ok(String str) {
-		DataOutputStream outToServer = new DataOutputStream(clientSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-		sentence = inFromUser.readLine();
-		outToServer.writeBytes(sentence + '\n');
+		int handshake = 0;
+		try {
+			handshake = in.read();
+		} catch (IOException ex) {
+			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
+		}
+
+		if (handshake == 1) {
+
+		} else {
+			done();
+		}
+
+		out.writeBytes(sentence + '\n');
 
 		modifiedSentence = inFromServer.readLine();
 		System.out.println("FROM SERVER: " + modifiedSentence);
 	}
 
 	private void done() {
+		this.connected = false;
 		try {
 			this.socket.close();
 		} catch (IOException ex){
-			Singleton.debugPrint("An Error was thrown when closing the connection socket.");
+			Singleton.debugPrint("An IOException was thrown when closing the connection socket.", ex);
 		}
 	}
 
