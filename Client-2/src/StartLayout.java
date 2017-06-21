@@ -54,7 +54,7 @@ public class StartLayout implements Layout {
 			if (validUserName(inputField.getText())){
 				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
 
-				Main.getInstance().gotoMessageLayout(inputField.getText());
+				Main.getInstance().gotoConnectingLayout(inputField.getText());
 			}
 		}
 

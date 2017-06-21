@@ -49,6 +49,10 @@ public class Connector {
 	}
 
 
+	public boolean isConnected() {
+		return this.connected;
+	}
+
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
 	 * @return

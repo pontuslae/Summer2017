@@ -32,7 +32,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class connectingLayout implements Layout {
+public class ConnectingLayout implements Layout {
 
 	public Scene get() {
 
@@ -54,7 +54,12 @@ class checkConnection extends Thread {
 	public void run() {
 		Singleton.debugPrint("Checking for server connection");
 
-		while (Connector)
+		Connector connector = Main.getConnector();
+
+		// Hangs the client while not connected.
+		while (!connector.isConnected()){}
+
+		Main.getInstance().gotoMessageLayout();
 
 	}
 

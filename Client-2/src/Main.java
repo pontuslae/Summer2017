@@ -34,6 +34,8 @@ public class Main extends Application {
 
 	private static Main instance;
 
+	String storedName = "Undefined";
+
 	public Main() {
 		instance = this;
 	}
@@ -51,7 +53,17 @@ public class Main extends Application {
 	}
 
 	void gotoMessageLayout(String str){
+		storedName = str;
 		this.stage.setScene(new MessageLayout(str).get());
+	}
+
+	void gotoMessageLayout(){
+		this.stage.setScene(new MessageLayout(storedName).get());
+	}
+
+	void gotoConnectingLayout(String str){
+		storedName = str;
+		this.stage.setScene(new ConnectingLayout().get());
 	}
 
 	@Override
