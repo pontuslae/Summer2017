@@ -22,6 +22,7 @@
 */
 
 
+import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;

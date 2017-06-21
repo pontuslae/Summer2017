@@ -21,6 +21,7 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
