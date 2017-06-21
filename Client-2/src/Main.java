@@ -27,8 +27,24 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
+	private Stage stage;
+
+	private static Main instance;
+
+	public Main() {
+		instance = this;
+	}
+
+	public static Main getInstance() {
+		return instance;
+	}
+
 	public static void main(String[] args) {
 		launch(args);
+	}
+
+	void gotoMessageLayout(){
+		this.stage.setScene(new MessageLayout().get());
 	}
 
 	@Override
@@ -40,9 +56,14 @@ public class Main extends Application {
 		StartLayout sl = new StartLayout();
 		primaryStage.setScene(sl.get());
 		primaryStage.show();
+		this.stage = primaryStage;
 
 		timer.stop();
 		timer.status("Slow start up");
+	}
+
+	public void setStage(){
+
 	}
 }
 
