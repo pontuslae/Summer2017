@@ -1,0 +1,2 @@
+-module(director).
+-compile(export_all).
