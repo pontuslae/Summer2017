@@ -27,6 +27,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.util.Collections;
+
 public class Singleton {
 
 	public static final int NEW_LINE = 13;
@@ -64,7 +66,15 @@ public class Singleton {
 			System.out.println(s);
 	}
 
-	public static void debugTransitionPrint() {
+	public static void debugTransitionPrint(String... str) {
+		// TODO: 15/06/2017 expand to introduce proper logs.
+		if (debug){
+			String combinedString = "";
+			for (String s: str)
+				combinedString += s + " -> ";
+			combinedString = combinedString.substring(0, combinedString.length() -4);
+			System.out.println(combinedString);
+		}
 
 	}
 

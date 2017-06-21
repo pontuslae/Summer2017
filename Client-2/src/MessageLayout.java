@@ -34,7 +34,7 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class MessageLayout extends Layout {
+public class MessageLayout implements Layout {
 
 	private TextField messageField;
 	private String userName = "";

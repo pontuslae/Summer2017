@@ -30,7 +30,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class StartLayout extends Layout {
+public class StartLayout implements Layout {
 
 	TextField inputField;
 	String input;
@@ -53,7 +53,7 @@ public class StartLayout extends Layout {
 	private void inputFieldListener(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 			if (validUserName(inputField.getText())){
-				Singleton.debugPrint("StartLayout -> MessageLayout");
+				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
 				input = inputField.getText();
 
 				Main.getInstance().gotoMessageLayout(inputField.getText());

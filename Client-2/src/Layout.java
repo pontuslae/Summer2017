@@ -21,6 +21,10 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class Layout {
+import javafx.scene.Scene;
+
+interface Layout {
+
+	Scene get();
 
 }
