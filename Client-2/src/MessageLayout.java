@@ -21,7 +21,6 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-
 import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;

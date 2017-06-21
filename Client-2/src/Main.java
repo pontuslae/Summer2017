@@ -21,6 +21,8 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Connector;
+import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -29,10 +31,18 @@ public class Main extends Application {
 
 	private Stage stage;
 
+	private static Connection.Connector connector = new Connection.Connector();
+
 	private static Main instance;
+
+	String storedName = "Undefined";
 
 	public Main() {
 		instance = this;
+	}
+
+	public static Connector getConnector() {
+		return connector;
 	}
 
 	public static Main getInstance() {
@@ -43,8 +53,28 @@ public class Main extends Application {
 		launch(args);
 	}
 
+	public void fromConnectingLayout() {
+
+		Singleton.debugPrint("FromConnectingLayout");
+		// Hangs while sync is alive.
+		while (ConnectingLayout.sync.isAlive());
+		Singleton.debugPrint("Sync confirmed, Thread dead.");
+		Main.getInstance().gotoMessageLayout(storedName);
+	}
+
 	void gotoMessageLayout(String str){
+		storedName = str;
 		this.stage.setScene(new MessageLayout(str).get());
+	}
+
+	void gotoMessageLayout(){
+		this.stage.setScene(new MessageLayout(storedName).get());
+	}
+
+	void gotoConnectingLayout(String str){
+		storedName = str;
+		this.stage.setScene(new ConnectingLayout().get());
+		Main.getInstance().fromConnectingLayout();
 	}
 
 	@Override

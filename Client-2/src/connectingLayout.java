@@ -1,4 +1,5 @@
 /*
+	* Created on 21/06/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -21,55 +22,50 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Connector;
 import External.Singleton;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class StartLayout implements Layout {
+public class ConnectingLayout implements Layout {
 
-	private TextField inputField;
+	static Thread sync;
 
-	StartLayout(){}
+	public Scene get() {
 
-	public Scene get(){
 		GridPane grid = Singleton.getDefaultGridPane();
 
-		Text scenetitle = new Text("Welcome");
+		Text scenetitle = new Text("Connecting.");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		inputField = new TextField();
-		grid.add(inputField, 1, 1);
-		inputField.addEventFilter(KeyEvent.KEY_TYPED, this::inputFieldListener);
+		sync = new Thread(new checkConnection());
+		sync.start();
+
 		return new Scene(grid, 300, 275);
 	}
 
-	private void inputFieldListener(KeyEvent e){
-		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
-			if (validUserName(inputField.getText())){
-				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
+}
 
-				Main.getInstance().gotoConnectingLayout(inputField.getText());
-			}
+class checkConnection extends Thread {
+
+	public void run() {
+		Singleton.debugPrint("Checking for server connection");
+
+		Connector connector = Main.getConnector();
+		try {
+			connector.connect();
+		} catch (Exception ex) {
+			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
+
 		}
 
-	}
-
-
-	/**
-	 * @return if the string is of appropriate length.
-	 */
-	private boolean validUserName(String str) {
-
-		// TODO: 12/06/2017 Evaluate if the user name is appropriate and valid.
-		// TODO: 12/06/2017 double check with SQL server if unique username.
-
-		return (str.length() < 16) && (str.length() > 4);
+		// Hangs the client while not connected.
+		while (!connector.isConnected());
+		this.stop();
 	}
 
 }
