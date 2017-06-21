@@ -62,7 +62,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageLayout.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MessageLayout.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/MessageLayout.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="88">
@@ -85,11 +85,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StartLayout.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StartLayout.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/StartLayout.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="242">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+            <state relative-caret-position="305">
+              <caret line="66" column="47" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -670,12 +670,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498067147170</updated>
-      <workItem from="1498067153432" duration="1758000" />
+      <workItem from="1498067153432" duration="2355000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1758000" />
+    <option name="totallyTimeSpent" value="2355000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1098" extended-state="6" />
@@ -780,6 +780,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/StartLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="66" column="47" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/MessageLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
@@ -787,16 +797,6 @@
           <folding>
             <element signature="e#1674#1675#0" expanded="true" />
             <element signature="e#1697#1698#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/StartLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

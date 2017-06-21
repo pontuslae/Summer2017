@@ -32,10 +32,9 @@ import javafx.scene.text.Text;
 
 public class StartLayout implements Layout {
 
-	TextField inputField;
-	String input;
+	private TextField inputField;
 
-	public StartLayout(){}
+	StartLayout(){}
 
 	public Scene get(){
 		GridPane grid = Singleton.getDefaultGridPane();
@@ -54,7 +53,6 @@ public class StartLayout implements Layout {
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 			if (validUserName(inputField.getText())){
 				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
-				input = inputField.getText();
 
 				Main.getInstance().gotoMessageLayout(inputField.getText());
 			}
