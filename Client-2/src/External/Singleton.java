@@ -1,4 +1,6 @@
-package External;/*
+package External;
+
+/*
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -69,7 +71,7 @@ public class Singleton {
 	public static void debugPrint(String s, Exception ex) { // TODO: 21/06/2017 handle exceptions
 		// TODO: 15/06/2017 expand to introduce proper logs.
 		if (debug)
-			System.out.println(s);
+			System.out.println("DP: " + s);
 	}
 
 	public static void debugTransitionPrint(String... str) {
@@ -79,7 +81,7 @@ public class Singleton {
 			for (String s: str)
 				combinedString += s + " -> ";
 			combinedString = combinedString.substring(0, combinedString.length() -4);
-			System.out.println(combinedString);
+			System.out.println("DP: " + combinedString);
 		}
 
 	}
