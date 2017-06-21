@@ -37,7 +37,7 @@ public class Singleton {
 		try {
 			throw new Exception("Can't instantiate an empty MessageLayout");
 		} catch (Exception ex) {
-			throw new Error("Unable to throw Exception.");
+			throw new Error("Can't instantiate an empty MessageLayout - Unable to throw Exception.");
 		}
 	}
 
@@ -62,6 +62,10 @@ public class Singleton {
 		// TODO: 15/06/2017 expand to introduce proper logs. 
 		if (debug)
 			System.out.println(s);
+	}
+
+	public static void debugTransitionPrint() {
+		
 	}
 
 }
