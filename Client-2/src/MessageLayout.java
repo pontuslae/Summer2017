@@ -27,18 +27,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class MessageLayout implements Layout {
 
 	private TextField messageField;
 	private String userName = "";
-	private ScrollPane sp;
+	private ScrollPane sp = new ScrollPane();
 
 	private ArrayList<Message> messages = new ArrayList<>();
 
@@ -57,7 +59,7 @@ public class MessageLayout implements Layout {
 		grid = updateMessageDisplay(grid);
 
 		messageField = new TextField();
-		grid.add(messageField, 1, 10);
+		grid.add(messageField, 1, 24);
 		messageField.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
 
 		return new Scene(grid, 300, 275);
@@ -77,6 +79,9 @@ public class MessageLayout implements Layout {
 	}
 
 	private boolean validMessage(String str) {
+		if (str.length() < 1){
+			return false;
+		}
 		return true; // TODO: 12/06/2017 improve this
 	}
 
@@ -95,21 +100,18 @@ public class MessageLayout implements Layout {
 
 	}
 
-	GridPane updateMessageDisplay(GridPane grid) {
-		sp = new ScrollPane();
+	private GridPane updateMessageDisplay(GridPane grid) {
 		sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-		sp.setHmin(200);
 
 		String t = "";
 
-		for (Message mes: messages){
+		for (Message mes: messages)
 			t += mes + "\n";
-		}
 
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Singleton.getDefaultFont());
 		sp.setContent(scenetitle);
-		grid.add(sp, 0, 0, 2, 7);
+		grid.add(sp, 0, 0, 5, 24);
 		return grid;
 	}
 }
