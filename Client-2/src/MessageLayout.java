@@ -95,8 +95,6 @@ public class MessageLayout implements Layout {
 			t += m.toString() + "\n";
 		}
 
-		Singleton.debugPrint(t + "" + messages.size());
-
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));
 		sp.setContent(scenetitle);

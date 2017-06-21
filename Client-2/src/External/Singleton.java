@@ -65,7 +65,7 @@ public class Singleton {
 	public static void debugPrint(String s) {
 		// TODO: 15/06/2017 expand to introduce proper logs. 
 		if (debug)
-			System.out.println(s);
+			System.out.println("DP: " + s);
 	}
 
 	public static void debugPrint(String s, Exception ex) { // TODO: 21/06/2017 handle exceptions
