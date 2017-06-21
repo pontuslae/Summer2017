@@ -1,4 +1,5 @@
 package Connection;
+
 /*
 	* Created on 21/06/2017.
 	* Copyright (c) 2017 Pontus Laestadius
@@ -40,14 +41,19 @@ public class Connector {
 
 	private ServerInfo serverinfo = new ServerInfo();
 
-	private Socket connect() throws Exception {
+	private void connect() throws Exception {
 		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
 		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		this.out = new DataOutputStream(this.socket.getOutputStream());
 		this.connected = true;
 	}
 
-	private boolean ok(String str) {
+
+	/**
+	 * Looks for a response from the server to confirm the message has been sent.
+	 * @return
+	 */
+	private boolean ok() {
 		int handshake = 0;
 		try {
 			handshake = in.read();
@@ -55,16 +61,12 @@ public class Connector {
 			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
 		}
 
-		if (handshake == 1) {
-
-		} else {
+		if (handshake != 1){
 			done();
+			return false;
 		}
 
-		out.writeBytes(sentence + '\n');
-
-		modifiedSentence = inFromServer.readLine();
-		System.out.println("FROM SERVER: " + modifiedSentence);
+		return true;
 	}
 
 	private void done() {
