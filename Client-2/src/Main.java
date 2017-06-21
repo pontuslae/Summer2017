@@ -52,6 +52,15 @@ public class Main extends Application {
 		launch(args);
 	}
 
+	public void fromConnectingLayout() {
+
+		// Hangs while sync is alive.
+		while (ConnectingLayout.sync.isAlive());
+		go
+
+
+	}
+
 	void gotoMessageLayout(String str){
 		storedName = str;
 		this.stage.setScene(new MessageLayout(str).get());

@@ -41,7 +41,7 @@ public class Connector {
 
 	private ServerInfo serverinfo = new ServerInfo();
 
-	private void connect() throws Exception {
+	public void connect() throws Exception {
 		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
 		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		this.out = new DataOutputStream(this.socket.getOutputStream());

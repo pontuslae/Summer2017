@@ -25,14 +25,14 @@
 import Connection.Connector;
 import External.Singleton;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class ConnectingLayout implements Layout {
+
+	static Thread sync;
 
 	public Scene get() {
 
@@ -42,7 +42,8 @@ public class ConnectingLayout implements Layout {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		(new Thread(new checkConnection())).start();
+		this.sync = new Thread(new checkConnection());
+		sync.start();
 
 		return new Scene(grid, 300, 275);
 	}
@@ -55,12 +56,15 @@ class checkConnection extends Thread {
 		Singleton.debugPrint("Checking for server connection");
 
 		Connector connector = Main.getConnector();
+		try {
+			connector.connect();
+		} catch (Exception ex) {
+			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
+
+		}
 
 		// Hangs the client while not connected.
 		while (!connector.isConnected()){}
-
-		Main.getInstance().gotoMessageLayout();
-
 	}
 
 }
