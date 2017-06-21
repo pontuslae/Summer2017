@@ -13,12 +13,11 @@ public class CheckConnection {
 			} catch (Exception ex) {
 				Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
 				ConnectingLayout.failedStatus = true;
-
+				return;
 			}
 
 			// Hangs the client while not connected.
 			while (!connector.isConnected());
-			this.stop();
 		}
 
 	}

@@ -61,11 +61,16 @@ public class Main extends Application {
 			if (ConnectingLayout.failedStatus) {
 				// TODO: 21/06/2017 Handle this exception better. 
 				System.out.println("Failed to connect to socket! Exiting"); // No debugprint is intentional
-				System.exit(1);
+				Main.getInstance().gotoFailedLayout();
+				return;
 			}
 		}
 		Singleton.debugPrint("Sync confirmed, Thread dead.");
 		Main.getInstance().gotoMessageLayout(storedName);
+	}
+
+	void gotoFailedLayout() {
+		this.stage.setScene(new ErrorLayout().get());
 	}
 
 	void gotoMessageLayout(String str){
