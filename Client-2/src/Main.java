@@ -43,8 +43,8 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	void gotoMessageLayout(){
-		this.stage.setScene(new MessageLayout().get());
+	void gotoMessageLayout(String str){
+		this.stage.setScene(new MessageLayout(str).get());
 	}
 
 	@Override

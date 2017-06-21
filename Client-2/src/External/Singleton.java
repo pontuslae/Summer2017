@@ -65,7 +65,7 @@ public class Singleton {
 	}
 
 	public static void debugTransitionPrint() {
-		
+
 	}
 
 }
