@@ -34,10 +34,14 @@ import java.net.Socket;
 
 public class Connector {
 
+	public static final int OK_INDICATOR = 1;
+
 	private Socket socket;
 	private boolean connected = false;
 	private BufferedReader in;
 	DataOutputStream out;
+	// TODO: 21/06/2017 Change this to false if you are using a real server and not a mock one.
+	private boolean mock = true;
 
 	private ServerInfo serverinfo = new ServerInfo();
 
@@ -67,7 +71,7 @@ public class Connector {
 			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
 		}
 
-		if (handshake != 1){
+		if (handshake != OK_INDICATOR){
 			done();
 			return false;
 		}
