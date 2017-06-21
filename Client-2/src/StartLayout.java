@@ -56,9 +56,7 @@ public class StartLayout extends Layout {
 				Singleton.debugPrint("StartLayout -> MessageLayout");
 				input = inputField.getText();
 
-				MessageLayout ml = new MessageLayout(input);
-				ml.get();
-				// TODO: 15/06/2017 Notify MainGui that this action has been performed.
+				Main.getInstance().gotoMessageLayout();
 			}
 		}
 
