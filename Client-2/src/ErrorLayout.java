@@ -42,18 +42,18 @@ public class ErrorLayout implements Layout {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		Text errorText;
+		String errorText = "Error " + errorCode + ": ";
 		switch (errorCode) {
 			case 0:
-				errorText = new Text("Error 0: No Socket found.");
+				errorText += "No Socket found.";
 				break;
 			default:
-				errorText = new Text("Sorry, It's not working :(");
-
+				errorText += "Unspecified error.";
 		}
 
-		errorText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(errorText, 1, 0, 2, 7);
+		Text errorSubText = new Text(errorText);
+		errorSubText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		grid.add(errorSubText, 1, 0, 2, 7);
 
 		return new Scene(grid, 300, 275);
 	}
