@@ -42,10 +42,12 @@ public class Connector {
 	private ServerInfo serverinfo = new ServerInfo();
 
 	public void connect() throws Exception {
+		Singleton.debugPrint("Connector: Connecting");
 		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
 		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		this.out = new DataOutputStream(this.socket.getOutputStream());
 		this.connected = true;
+		Singleton.debugPrint("Connector: Connected");
 	}
 
 

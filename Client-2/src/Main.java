@@ -22,6 +22,7 @@
 */
 
 import Connection.Connector;
+import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -54,11 +55,11 @@ public class Main extends Application {
 
 	public void fromConnectingLayout() {
 
+		Singleton.debugPrint("FromConnectingLayout");
 		// Hangs while sync is alive.
 		while (ConnectingLayout.sync.isAlive());
-		go
-
-
+		Singleton.debugPrint("Sync confirmed, Thread dead.");
+		Main.getInstance().gotoMessageLayout(storedName);
 	}
 
 	void gotoMessageLayout(String str){
@@ -73,6 +74,7 @@ public class Main extends Application {
 	void gotoConnectingLayout(String str){
 		storedName = str;
 		this.stage.setScene(new ConnectingLayout().get());
+		Main.getInstance().fromConnectingLayout();
 	}
 
 	@Override

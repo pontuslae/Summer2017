@@ -42,7 +42,7 @@ public class ConnectingLayout implements Layout {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		this.sync = new Thread(new checkConnection());
+		sync = new Thread(new checkConnection());
 		sync.start();
 
 		return new Scene(grid, 300, 275);
@@ -64,7 +64,8 @@ class checkConnection extends Thread {
 		}
 
 		// Hangs the client while not connected.
-		while (!connector.isConnected()){}
+		while (!connector.isConnected());
+		this.stop();
 	}
 
 }
