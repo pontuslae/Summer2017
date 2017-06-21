@@ -21,6 +21,7 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Connector;
 import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -70,7 +71,10 @@ public class MessageLayout implements Layout {
 			Singleton.debugPrint("Send Message: " + messageField.getText());
 
 			if (validMessage(messageField.getText())){
-				messages.add(new Message(userName, messageField.getText()));
+
+				Main.getConnector().send(messageField.getText());
+
+				this.messages.add(new Message(userName, messageField.getText()));
 				messageField.setText("");
 				displayMessages();
 			}
@@ -90,8 +94,6 @@ public class MessageLayout implements Layout {
 		for (Message m: messages){
 			t += m.toString() + "\n";
 		}
-
-		Singleton.debugPrint(t + "" + messages.size());
 
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));

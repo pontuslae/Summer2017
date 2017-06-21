@@ -34,10 +34,14 @@ import java.net.Socket;
 
 public class Connector {
 
+	public static final int OK_INDICATOR = 1;
+
 	private Socket socket;
 	private boolean connected = false;
 	private BufferedReader in;
 	DataOutputStream out;
+	// TODO: 21/06/2017 Change this to false if you are using a real server and not a mock one.
+	private boolean mock = true;
 
 	private ServerInfo serverinfo = new ServerInfo();
 
@@ -50,6 +54,9 @@ public class Connector {
 		Singleton.debugPrint("Connector: Connected");
 	}
 
+	public void mock() {
+
+	}
 
 	public boolean isConnected() {
 		return this.connected;
@@ -57,9 +64,9 @@ public class Connector {
 
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
-	 * @return
+	 * @return true if the server responded to the users command.
 	 */
-	private boolean ok() {
+	public boolean ok() {
 		int handshake = 0;
 		try {
 			handshake = in.read();
@@ -67,7 +74,7 @@ public class Connector {
 			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
 		}
 
-		if (handshake != 1){
+		if (handshake != OK_INDICATOR){
 			done();
 			return false;
 		}
@@ -84,11 +91,26 @@ public class Connector {
 		}
 	}
 
-	private void send(String str) {
+	public void send(String str) {
+		try {
+			this.connect();
+
+			Thread itt = new IgnoreThisTCP();
+			itt.start();
+			IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
+
+
+			out.writeUTF(str);
+
+			done();
+
+		} catch (Exception ex) {
+
+		}
 
 	}
 
-	private String receive() {
+	public String receive() {
 		return "";
 	}
 

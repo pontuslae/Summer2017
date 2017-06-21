@@ -57,7 +57,6 @@ public class StartLayout implements Layout {
 				Main.getInstance().gotoConnectingLayout(inputField.getText());
 			}
 		}
-
 	}
 
 
