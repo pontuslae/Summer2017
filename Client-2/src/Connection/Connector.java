@@ -30,7 +30,7 @@ import java.net.Socket;
 
 public class Connector {
 
-	public static void main(String argv[]) throws Exception {
+	private Socket connect() throws Exception {
 		String sentence;
 		String modifiedSentence;
 		BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
@@ -44,8 +44,20 @@ public class Connector {
 		clientSocket.close();
 	}
 
-	public static String[] getOnlineUsers() {
-		
+	private void send() {
+
+	}
+
+	private String receive() {
+		return "";
+	}
+
+	public String[] getOnlineUsers() {
+		return null;
+	}
+
+	public boolean matchStatus(Object[] statusObjects){
+		return false;
 	}
 
 }
