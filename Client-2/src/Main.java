@@ -57,7 +57,13 @@ public class Main extends Application {
 
 		Singleton.debugPrint("FromConnectingLayout");
 		// Hangs while sync is alive.
-		while (ConnectingLayout.sync.isAlive());
+		while (ConnectingLayout.sync.isAlive()){
+			if (ConnectingLayout.failedStatus) {
+				// TODO: 21/06/2017 Handle this exception better. 
+				System.out.println("Failed to connect to socket! Exiting"); // No debugprint is intentional
+				System.exit(1);
+			}
+		}
 		Singleton.debugPrint("Sync confirmed, Thread dead.");
 		Main.getInstance().gotoMessageLayout(storedName);
 	}

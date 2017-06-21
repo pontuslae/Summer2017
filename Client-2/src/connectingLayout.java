@@ -22,7 +22,6 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Connector;
 import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -33,6 +32,7 @@ import javafx.scene.text.Text;
 public class ConnectingLayout implements Layout {
 
 	static Thread sync;
+	static boolean failedStatus = false;
 
 	public Scene get() {
 
@@ -42,7 +42,7 @@ public class ConnectingLayout implements Layout {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		sync = new Thread(new checkConnection());
+		sync = new Thread(new CheckConnection.checkConnection());
 		sync.start();
 
 		return new Scene(grid, 300, 275);
@@ -50,22 +50,3 @@ public class ConnectingLayout implements Layout {
 
 }
 
-class checkConnection extends Thread {
-
-	public void run() {
-		Singleton.debugPrint("Checking for server connection");
-
-		Connector connector = Main.getConnector();
-		try {
-			connector.connect();
-		} catch (Exception ex) {
-			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
-
-		}
-
-		// Hangs the client while not connected.
-		while (!connector.isConnected());
-		this.stop();
-	}
-
-}
