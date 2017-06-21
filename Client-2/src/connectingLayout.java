@@ -22,5 +22,40 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class connectingLayout {
+import Connection.Connector;
+import External.Singleton;
+import javafx.scene.Scene;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+
+public class connectingLayout implements Layout {
+
+	public Scene get() {
+
+		GridPane grid = Singleton.getDefaultGridPane();
+
+		Text scenetitle = new Text("Connecting.");
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		grid.add(scenetitle, 1, 0, 2, 1);
+
+		(new Thread(new checkConnection())).start();
+
+		return new Scene(grid, 300, 275);
+	}
+
+}
+
+class checkConnection extends Thread {
+
+	public void run() {
+		Singleton.debugPrint("Checking for server connection");
+
+		while (Connector)
+
+	}
+
 }

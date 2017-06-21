@@ -21,6 +21,7 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Connector;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -29,10 +30,16 @@ public class Main extends Application {
 
 	private Stage stage;
 
+	private static Connection.Connector connector = new Connection.Connector();
+
 	private static Main instance;
 
 	public Main() {
 		instance = this;
+	}
+
+	public static Connector getConnector() {
+		return connector;
 	}
 
 	public static Main getInstance() {
