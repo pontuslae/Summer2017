@@ -88,6 +88,10 @@ public class Main extends Application {
 		Main.getInstance().fromConnectLayout();
 	}
 
+	void gotoStartLayout() {
+		this.stage.setScene(new StartLayout().get());
+	}
+
 	@Override
 	public void start(Stage primaryStage) {
 		Timer timer = new Timer(1000);
