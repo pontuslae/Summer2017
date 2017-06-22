@@ -35,7 +35,7 @@ import java.net.Socket;
 public class Connector {
 
 	public static final int OK_INDICATOR = 1;
-	public static final boolean MOCK_STATUS = true;
+	public static final boolean MOCK_STATUS = false;
 
 	private Socket socket;
 	private boolean connected = false;
@@ -95,17 +95,20 @@ public class Connector {
 		try {
 			this.connect();
 
-			Thread itt = new IgnoreThisTCP();
-			itt.start();
-			Singleton.debugPrint("Starting mock instance");
-			IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
-
 			Singleton.debugPrint("Writing to the socket.");
-			out.writeUTF(str + '\n');
+			if (MOCK_STATUS) {
+				Thread itt = new IgnoreThisTCP();
+				itt.start();
+				Singleton.debugPrint("Starting mock instance");
+				IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
+			} else {
+				this.out.writeUTF(str + '\n');
+			}
+
 			done();
 
 		} catch (Exception ex) {
-
+			Singleton.debugPrint("Exception thrown when sending ");
 		}
 
 	}
