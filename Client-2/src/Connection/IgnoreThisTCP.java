@@ -19,17 +19,27 @@ public class IgnoreThisTCP extends Thread {
 	}
 
 	public void run() {
-		th = this;
-		try {
-			this.serverSocket = new ServerSocket(9005);
-		} catch (IOException ex) {
-			Singleton.debugPrint("Exception was thrown during mocking", ex);
+		if (this.serverSocket == null){
+			try {
+				this.serverSocket = new ServerSocket(9005);
+			} catch (IOException ex) {
+				Singleton.debugPrint("Exception was thrown during mocking", ex);
+			}
+
+			Singleton.debugPrint("Starting Mocking server.");
+			try {
+				this.serverSocket.accept();
+				Singleton.debugPrint("Connected to Mocking server.");
+			} catch (IOException ex) {
+				Singleton.debugPrint("An IOException was thrown when mocking a server and accepting.");
+			}
+
 		}
+		th = this;
 	}
 
 	public IgnoreThisTCP() {
 	}
-
 
 	public void mock(String receive, int send){
 		try {

@@ -43,6 +43,7 @@ public class StartLayout implements Layout {
 		// If we are using a mock server. Start it.
 		if (Connector.MOCK_STATUS){
 			Thread itt = new IgnoreThisTCP();
+			itt.start();
 		}
 
 		GridPane grid = Singleton.getDefaultGridPane();

@@ -69,8 +69,6 @@ public class ErrorLayout implements Layout {
 
 		grid.add(goBack, 1, 0, 2, 15);
 
-
-
 		return new Scene(grid, 300, 275);
 	}
 
