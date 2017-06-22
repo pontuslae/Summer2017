@@ -62,7 +62,7 @@ public class MessageLayout implements Layout {
 		grid.add(messageField, 1, 24);
 		messageField.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
 
-		return new Scene(grid, 300, 275);
+		return new Scene(grid, 600, 275);
 	}
 
 	private void sendMessage(KeyEvent e){
@@ -91,9 +91,8 @@ public class MessageLayout implements Layout {
 	private void displayMessages(){
 		String t = "";
 
-		for (Message m: messages){
+		for (Message m: messages)
 			t += m.toString() + "\n";
-		}
 
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 16));

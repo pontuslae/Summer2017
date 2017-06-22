@@ -35,13 +35,13 @@ import java.net.Socket;
 public class Connector {
 
 	public static final int OK_INDICATOR = 1;
+	public static final boolean MOCK_STATUS = true;
 
 	private Socket socket;
 	private boolean connected = false;
 	private BufferedReader in;
 	DataOutputStream out;
 	// TODO: 21/06/2017 Change this to false if you are using a real server and not a mock one.
-	private boolean mock = true;
 
 	private ServerInfo serverinfo = new ServerInfo();
 

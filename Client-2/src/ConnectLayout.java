@@ -29,7 +29,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class ConnectingLayout implements Layout {
+public class ConnectLayout implements Layout {
 
 	static Thread sync;
 	static boolean failedStatus = false;

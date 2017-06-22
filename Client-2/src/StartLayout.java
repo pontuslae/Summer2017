@@ -21,6 +21,8 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Connector;
+import Connection.IgnoreThisTCP;
 import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
@@ -37,6 +39,12 @@ public class StartLayout implements Layout {
 	StartLayout(){}
 
 	public Scene get(){
+
+		// If we are using a mock server. Start it.
+		if (Connector.MOCK_STATUS){
+			Thread itt = new IgnoreThisTCP();
+		}
+
 		GridPane grid = Singleton.getDefaultGridPane();
 
 		Text scenetitle = new Text("Welcome");
@@ -54,7 +62,7 @@ public class StartLayout implements Layout {
 			if (validUserName(inputField.getText())){
 				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
 
-				Main.getInstance().gotoConnectingLayout(inputField.getText());
+				Main.getInstance().gotoConnectLayout(inputField.getText());
 			}
 		}
 	}

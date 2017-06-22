@@ -57,6 +57,11 @@ public class ErrorLayout implements Layout {
 		grid.add(errorSubText, 1, 0, 2, 7);
 
 		Button goBack = new Button("Go Back");
+		goBack.isDefaultButton();
+
+
+
+
 		grid.add(goBack, 1, 0, 2, 15);
 
 

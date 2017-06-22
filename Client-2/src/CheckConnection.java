@@ -12,7 +12,7 @@ public class CheckConnection {
 				connector.connect();
 			} catch (Exception ex) {
 				Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
-				ConnectingLayout.failedStatus = true;
+				ConnectLayout.failedStatus = true;
 				return;
 			}
 

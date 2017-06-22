@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
-class IgnoreThisTCP extends Thread {
+public class IgnoreThisTCP extends Thread {
 
 	ServerSocket serverSocket;
 
@@ -27,12 +27,7 @@ class IgnoreThisTCP extends Thread {
 		}
 	}
 
-	IgnoreThisTCP() {
-		try {
-			this.serverSocket = new ServerSocket(9005);
-		} catch (IOException ex) {
-			Singleton.debugPrint("Exception was thrown during mocking", ex);
-		}
+	public IgnoreThisTCP() {
 	}
 
 
