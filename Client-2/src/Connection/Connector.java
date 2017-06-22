@@ -100,7 +100,7 @@ public class Connector {
 			IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
 
 
-			out.writeUTF(str);
+			out.writeUTF(str + '\n');
 
 			done();
 
