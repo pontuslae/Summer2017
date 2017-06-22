@@ -97,11 +97,11 @@ public class Connector {
 
 			Thread itt = new IgnoreThisTCP();
 			itt.start();
+			Singleton.debugPrint("Starting mock instance");
 			IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
 
-
+			Singleton.debugPrint("Writing to the socket.");
 			out.writeUTF(str + '\n');
-
 			done();
 
 		} catch (Exception ex) {
