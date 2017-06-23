@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.*;
 
-class IgnoreThisTCP extends Thread {
+public class IgnoreThisTCP extends Thread {
 
 	ServerSocket serverSocket;
 
@@ -19,7 +19,24 @@ class IgnoreThisTCP extends Thread {
 	}
 
 	public void run() {
+		if (th == null) {
+			Singleton.debugPrint("itt: th == null");
+			makeServerSocket();
+		} else if (th.serverSocket == null){
+			Singleton.debugPrint("itt: th.serverSocket == null");
+			makeServerSocket();
+
+			Singleton.debugPrint("Starting Mocking server.");
+			accept();
+
+		} else {
+			Singleton.debugPrint("itt: else");
+			this.serverSocket = th.serverSocket;
+		}
 		th = this;
+	}
+
+	private void makeServerSocket(){
 		try {
 			this.serverSocket = new ServerSocket(9005);
 		} catch (IOException ex) {
@@ -27,18 +44,23 @@ class IgnoreThisTCP extends Thread {
 		}
 	}
 
-	IgnoreThisTCP() {
+	private void accept(){
 		try {
-			this.serverSocket = new ServerSocket(9005);
+			this.serverSocket.accept();
+			Singleton.debugPrint("Connected to Mocking server.");
 		} catch (IOException ex) {
-			Singleton.debugPrint("Exception was thrown during mocking", ex);
+			Singleton.debugPrint("An IOException was thrown when mocking a server and accepting.");
 		}
 	}
 
+	public IgnoreThisTCP() {
+	}
 
 	public void mock(String receive, int send){
 		try {
+			Singleton.debugPrint("itt: Blocking for accept");
 			Socket socket = serverSocket.accept();
+			Singleton.debugPrint("itt: Accepted");
 
 			BufferedReader inFromClient =
 					new BufferedReader(new InputStreamReader(socket.getInputStream()));

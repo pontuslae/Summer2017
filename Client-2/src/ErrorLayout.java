@@ -23,12 +23,16 @@
 */
 
 import External.Singleton;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ErrorLayout implements Layout {
 
@@ -57,11 +61,17 @@ public class ErrorLayout implements Layout {
 		grid.add(errorSubText, 1, 0, 2, 7);
 
 		Button goBack = new Button("Go Back");
+
+		goBack.setOnAction((event) -> {
+			Main.getInstance().gotoStartLayout();
+		});
+		goBack.isDefaultButton();
+
 		grid.add(goBack, 1, 0, 2, 15);
-
-
 
 		return new Scene(grid, 300, 275);
 	}
+
+
 
 }

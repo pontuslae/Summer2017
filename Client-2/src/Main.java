@@ -53,12 +53,12 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	public void fromConnectingLayout() {
+	public void fromConnectLayout() {
 
-		Singleton.debugPrint("FromConnectingLayout");
+		Singleton.debugPrint("FromConnectLayout");
 		// Hangs while sync is alive.
-		while (ConnectingLayout.sync.isAlive()){
-			if (ConnectingLayout.failedStatus) {
+		while (ConnectLayout.sync.isAlive()){
+			if (ConnectLayout.failedStatus) {
 				// TODO: 21/06/2017 Handle this exception better. 
 				System.out.println("Failed to connect to socket! Exiting"); // No debugprint is intentional
 				Main.getInstance().gotoFailedLayout();
@@ -82,10 +82,14 @@ public class Main extends Application {
 		this.stage.setScene(new MessageLayout(storedName).get());
 	}
 
-	void gotoConnectingLayout(String str){
+	void gotoConnectLayout(String str){
 		storedName = str;
-		this.stage.setScene(new ConnectingLayout().get());
-		Main.getInstance().fromConnectingLayout();
+		this.stage.setScene(new ConnectLayout().get());
+		Main.getInstance().fromConnectLayout();
+	}
+
+	void gotoStartLayout() {
+		this.stage.setScene(new StartLayout().get());
 	}
 
 	@Override
