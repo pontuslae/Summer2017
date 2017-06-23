@@ -95,7 +95,7 @@ public class Connector {
 		try {
 			this.connect();
 
-			Singleton.debugPrint("Writing to the socket.");
+			Singleton.debugPrint("Writing to the socket");
 			if (MOCK_STATUS) {
 				Thread itt = new IgnoreThisTCP();
 				itt.start();
@@ -109,6 +109,19 @@ public class Connector {
 
 		} catch (Exception ex) {
 			Singleton.debugPrint("Exception thrown when sending ");
+			// An exception might have been thrown because the connection is dead.
+			// This will occur when the user sends messages too fast.
+			try {
+				Singleton.debugPrint("Attempting to reconnect to socket");
+				this.socket.setSoTimeout(2000);
+				connect();
+
+				Singleton.debugPrint("Sending the command again");
+				this.out.writeUTF(str + '\n');
+
+			} catch (Exception e) {
+				Singleton.debugPrint("Exception thrown when sending ");
+			}
 		}
 
 	}

@@ -1,6 +1,11 @@
 -module(director).
 -compile(export_all).
 
+
+infinityserver() ->
+	_ = server(),
+	_ = infinityserver().
+
 server() ->
     {ok, LSock} = gen_tcp:listen(9005, [binary, {packet, 0}, 
                                         {active, false}]),
