@@ -41,10 +41,15 @@ public class Connector extends Server {
 	 * Looks for a response from the server to confirm the message has been sent.
 	 * @return true if the server responded to the users command.
 	 */
-	public boolean ok() throws IOException {
+	public boolean ok() throws IOException, NotOK {
 		int handshake = 0;
-		handshake = in.read();
-		done();
+		for (int i = 0; i < 1000; i++){
+			handshake = in.read();
+
+			// If the byte is end of stream byte, loop 1000 bytes, to see if we can get a better one.
+			if (handshake != -1) break;
+		}
+
 		if (handshake != OK_INDICATOR){
 			done();
 			return false;
