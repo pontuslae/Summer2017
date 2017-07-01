@@ -37,24 +37,14 @@ public class Connector extends Server {
 	public static final int OK_INDICATOR = 1;
 	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
 
-	private boolean connected = false;
-
-	public boolean isConnected() {
-		return this.connected;
-	}
-
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
 	 * @return true if the server responded to the users command.
 	 */
-	public boolean ok() {
+	public boolean ok() throws IOException {
 		int handshake = 0;
-		try {
-			handshake = in.read();
-		} catch (IOException ex) {
-			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
-		}
-
+		handshake = in.read();
+		done();
 		if (handshake != OK_INDICATOR){
 			done();
 			return false;
@@ -64,7 +54,6 @@ public class Connector extends Server {
 	}
 
 	private void done() {
-		this.connected = false;
 		try {
 			this.socket.close();
 		} catch (IOException ex){
