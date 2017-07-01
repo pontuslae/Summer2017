@@ -32,31 +32,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-public class Connector {
+public class Connector extends Server {
 
 	public static final int OK_INDICATOR = 1;
-	public static final boolean MOCK_STATUS = false;
+	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
 
-	private Socket socket;
 	private boolean connected = false;
-	private BufferedReader in;
-	DataOutputStream out;
-	// TODO: 21/06/2017 Change this to false if you are using a real server and not a mock one.
-
-	private ServerInfo serverinfo = new ServerInfo();
-
-	public void connect() throws Exception {
-		Singleton.debugPrint("Connector: Connecting");
-		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
-		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-		this.out = new DataOutputStream(this.socket.getOutputStream());
-		this.connected = true;
-		Singleton.debugPrint("Connector: Connected");
-	}
-
-	public void mock() {
-
-	}
 
 	public boolean isConnected() {
 		return this.connected;

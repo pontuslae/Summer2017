@@ -1,5 +1,7 @@
-package Connection; /*
-	* Created on 21/06/2017.
+package Connection;
+
+/*
+	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,23 +24,42 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class ServerInfo {
+import External.Singleton;
 
-	private int port = 9005;
-	private String address = "localhost";
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
-	ServerInfo() {}
+public class Server {
 
-	ServerInfo(String address) {
-		this.address = address;
+	ServerInfo si;
+	Socket socket;
+	DataOutputStream out;
+	BufferedReader in;
+
+	Server() {
+		si = new ServerInfo();
 	}
 
-	int getPort() {
-		return this.port;
+	Server(ServerInfo si) {
+		this.si = si;
 	}
 
-	String getAddress() {
-		return this.address;
+	Server(ServerInfo si, Socket socket) {
+		this.si = si;
+		this.socket = socket;
 	}
 
+	Server(Socket socket) {
+		this.socket = socket;
+	}
+
+	public void connect() throws Exception {
+		Singleton.debugPrint("Connector: Connecting");
+		this.socket = new Socket(this.si.getAddress(), si.getPort());
+		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+		this.out = new DataOutputStream(this.socket.getOutputStream());
+		Singleton.debugPrint("Connector: Connected");
+	}
 }
