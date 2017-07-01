@@ -10,6 +10,7 @@ server() ->
     {ok, LSock} = gen_tcp:listen(9005, [binary, {packet, 0}, 
                                         {active, false}]),
     {ok, Sock} = gen_tcp:accept(LSock),
+	ok = temp_send(Sock),
     {ok, Bin} = do_recv(Sock, []),
     ok = gen_tcp:close(Sock),
     Bin.
@@ -22,3 +23,6 @@ do_recv(Sock, Bs) ->
             {ok, list_to_binary(Bs)}
     end.
 	
+temp_send(Sock) ->
+	gen_tcp:send(Sock, "localhost\n"),
+	gen_tcp:send(Sock, "9006\n").

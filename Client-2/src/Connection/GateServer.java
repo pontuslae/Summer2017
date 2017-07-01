@@ -37,6 +37,7 @@ public class GateServer extends Server {
 		this.socket.setSoTimeout(3000);
 		String first = in.readLine();
 		String second = in.readLine();
+		Singleton.debugPrint("New Server: " + first + " " + second);
 
 		ServerInfo si = new ServerInfo(first, Integer.getInteger(second));
 		return new Server(si);
