@@ -1,0 +1,2 @@
+cd("C:/users/pontu/summer2017/server/").
+c(director).

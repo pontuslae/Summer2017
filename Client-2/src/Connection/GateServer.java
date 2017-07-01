@@ -22,6 +22,8 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import External.Singleton;
+
 import java.io.IOException;
 
 public class GateServer extends Server {
@@ -30,7 +32,8 @@ public class GateServer extends Server {
 	 * @return a new server where the data should be sent.
 	 * @throws IOException If the input streams are dead.
 	 */
-	Server transfer() throws IOException {
+	public Server transfer() throws IOException {
+		Singleton.debugPrint("Transferring Servers");
 		this.socket.setSoTimeout(3000);
 		String first = in.readLine();
 		String second = in.readLine();

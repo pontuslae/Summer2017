@@ -34,6 +34,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MessageLayout implements Layout {
@@ -72,7 +73,11 @@ public class MessageLayout implements Layout {
 
 			if (validMessage(messageField.getText())){
 
-				Main.getConnector().send(messageField.getText());
+				try {
+					Main.getConnector().send(messageField.getText());
+				} catch (IOException ex){
+					Singleton.debugPrint("Couldn't send message", ex);
+				}
 
 				this.messages.add(new Message(userName, messageField.getText()));
 				messageField.setText("");
