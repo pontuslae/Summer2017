@@ -33,6 +33,11 @@ class ServerInfo {
 		this.address = address;
 	}
 
+	ServerInfo(String address, int port) {
+		this.address = address;
+		this.port = port;
+	}
+
 	int getPort() {
 		return this.port;
 	}

@@ -1,6 +1,4 @@
-package Connection;
-
-/*
+package Connection; /*
 	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
@@ -24,40 +22,5 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
-
-public class Server {
-
-	ServerInfo si;
-	Socket socket;
-	DataOutputStream out;
-	BufferedReader in;
-
-	Server() {
-		si = new ServerInfo();
-	}
-
-	Server(ServerInfo si) {
-		this.si = si;
-	}
-
-	Server(ServerInfo si, Socket socket) {
-		this.si = si;
-		this.socket = socket;
-	}
-
-	Server(Socket socket) {
-		this.socket = socket;
-	}
-
-	public void connect() throws Exception {
-		this.socket = new Socket(this.si.getAddress(), si.getPort());
-		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-		this.out = new DataOutputStream(this.socket.getOutputStream());
-	}
+public class DataServer extends Server {
 }

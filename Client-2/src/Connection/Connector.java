@@ -26,23 +26,19 @@ package Connection;
 
 import External.Singleton;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 
 public class Connector extends Server {
 
-	public static final int OK_INDICATOR = 1;
+	private static final int OK_INDICATOR = 1;
 	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
 
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
-	 * @return true if the server responded to the users command.
 	 */
-	public boolean ok() throws IOException, NotOK {
+	public void ok() throws IOException, NotOK {
 		int handshake = 0;
+
 		for (int i = 0; i < 1000; i++){
 			handshake = in.read();
 
@@ -52,10 +48,8 @@ public class Connector extends Server {
 
 		if (handshake != OK_INDICATOR){
 			done();
-			return false;
+			throw new NotOK();
 		}
-
-		return true;
 	}
 
 	private void done() {

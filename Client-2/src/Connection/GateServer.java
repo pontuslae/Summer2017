@@ -1,6 +1,4 @@
-package Connection;
-
-/*
+package Connection; /*
 	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
@@ -24,40 +22,21 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
+import java.io.IOException;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStreamReader;
-import java.net.Socket;
+public class GateServer extends Server {
 
-public class Server {
+	/**
+	 * @return a new server where the data should be sent.
+	 * @throws IOException If the input streams are dead.
+	 */
+	Server transfer() throws IOException {
+		this.socket.setSoTimeout(3000);
+		String first = in.readLine();
+		String second = in.readLine();
 
-	ServerInfo si;
-	Socket socket;
-	DataOutputStream out;
-	BufferedReader in;
-
-	Server() {
-		si = new ServerInfo();
+		ServerInfo si = new ServerInfo(first, Integer.getInteger(second));
+		return new Server(si);
 	}
 
-	Server(ServerInfo si) {
-		this.si = si;
-	}
-
-	Server(ServerInfo si, Socket socket) {
-		this.si = si;
-		this.socket = socket;
-	}
-
-	Server(Socket socket) {
-		this.socket = socket;
-	}
-
-	public void connect() throws Exception {
-		this.socket = new Socket(this.si.getAddress(), si.getPort());
-		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-		this.out = new DataOutputStream(this.socket.getOutputStream());
-	}
 }
