@@ -26,64 +26,33 @@ package Connection;
 
 import External.Singleton;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.Socket;
 
-public class Connector {
+public class Connector extends Server {
 
-	public static final int OK_INDICATOR = 1;
-	public static final boolean MOCK_STATUS = false;
-
-	private Socket socket;
-	private boolean connected = false;
-	private BufferedReader in;
-	DataOutputStream out;
-	// TODO: 21/06/2017 Change this to false if you are using a real server and not a mock one.
-
-	private ServerInfo serverinfo = new ServerInfo();
-
-	public void connect() throws Exception {
-		Singleton.debugPrint("Connector: Connecting");
-		this.socket = new Socket(serverinfo.getAddress(), serverinfo.getPort());
-		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-		this.out = new DataOutputStream(this.socket.getOutputStream());
-		this.connected = true;
-		Singleton.debugPrint("Connector: Connected");
-	}
-
-	public void mock() {
-
-	}
-
-	public boolean isConnected() {
-		return this.connected;
-	}
+	private static final int OK_INDICATOR = 1;
+	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
 
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
-	 * @return true if the server responded to the users command.
 	 */
-	public boolean ok() {
+	public void ok() throws IOException, NotOK {
 		int handshake = 0;
-		try {
+
+		for (int i = 0; i < 1000; i++){
 			handshake = in.read();
-		} catch (IOException ex) {
-			Singleton.debugPrint("An IOException was thrown when handshaking ok.", ex);
+
+			// If the byte is end of stream byte, loop 1000 bytes, to see if we can get a better one.
+			if (handshake != -1) break;
 		}
 
 		if (handshake != OK_INDICATOR){
 			done();
-			return false;
+			throw new NotOK();
 		}
-
-		return true;
 	}
 
 	private void done() {
-		this.connected = false;
 		try {
 			this.socket.close();
 		} catch (IOException ex){
@@ -95,7 +64,7 @@ public class Connector {
 		try {
 			this.connect();
 
-			Singleton.debugPrint("Writing to the socket.");
+			Singleton.debugPrint("Writing to the socket");
 			if (MOCK_STATUS) {
 				Thread itt = new IgnoreThisTCP();
 				itt.start();
@@ -109,6 +78,19 @@ public class Connector {
 
 		} catch (Exception ex) {
 			Singleton.debugPrint("Exception thrown when sending ");
+			// An exception might have been thrown because the connection is dead.
+			// This will occur when the user sends messages too fast.
+			try {
+				Singleton.debugPrint("Attempting to reconnect to socket");
+				this.socket.setSoTimeout(2000);
+				connect();
+
+				Singleton.debugPrint("Sending the command again");
+				this.out.writeUTF(str + '\n');
+
+			} catch (Exception e) {
+				Singleton.debugPrint("Exception thrown when sending ");
+			}
 		}
 
 	}

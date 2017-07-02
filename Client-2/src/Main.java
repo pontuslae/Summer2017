@@ -22,6 +22,7 @@
 */
 
 import Connection.Connector;
+import Connection.Server;
 import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
@@ -31,7 +32,7 @@ public class Main extends Application {
 
 	private Stage stage;
 
-	private static Connection.Connector connector = new Connection.Connector();
+	private static Connection.Server server = new Connection.Connector();
 
 	private static Main instance;
 
@@ -41,8 +42,12 @@ public class Main extends Application {
 		instance = this;
 	}
 
-	public static Connector getConnector() {
-		return connector;
+	public static Connection.Server getConnector() {
+		return server;
+	}
+
+	public static void setConnector(Server ser) {
+		server = ser;
 	}
 
 	public static Main getInstance() {

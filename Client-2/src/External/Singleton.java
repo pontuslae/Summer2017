@@ -70,8 +70,10 @@ public class Singleton {
 
 	public static void debugPrint(String s, Exception ex) { // TODO: 21/06/2017 handle exceptions
 		// TODO: 15/06/2017 expand to introduce proper logs.
-		if (debug)
+		if (debug) {
 			System.out.println("DP: " + s);
+			ex.printStackTrace();
+		}
 	}
 
 	public static void debugTransitionPrint(String... str) {

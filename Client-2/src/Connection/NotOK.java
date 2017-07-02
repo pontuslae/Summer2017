@@ -1,5 +1,5 @@
 package Connection; /*
-	* Created on 21/06/2017.
+	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,28 +22,9 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class ServerInfo {
-
-	private int port = 9005;
-	private String address = "localhost";
-
-	ServerInfo() {}
-
-	ServerInfo(String address) {
-		this.address = address;
-	}
-
-	ServerInfo(String address, int port) {
-		this.address = address;
-		this.port = port;
-	}
-
-	int getPort() {
-		return this.port;
-	}
-
-	String getAddress() {
-		return this.address;
-	}
-
+public class NotOK extends Exception {
+	public NotOK() { super(); }
+	public NotOK(String message) { super(message); }
+	public NotOK(String message, Throwable cause) { super(message, cause); }
+	public NotOK(Throwable cause) { super(cause); }
 }

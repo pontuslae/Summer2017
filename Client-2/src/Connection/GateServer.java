@@ -1,5 +1,5 @@
 package Connection; /*
-	* Created on 21/06/2017.
+	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,28 +22,24 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class ServerInfo {
+import External.Singleton;
 
-	private int port = 9005;
-	private String address = "localhost";
+import java.io.IOException;
 
-	ServerInfo() {}
+public class GateServer extends Server {
 
-	ServerInfo(String address) {
-		this.address = address;
-	}
+	/**
+	 * @return a new server where the data should be sent.
+	 * @throws IOException If the input streams are dead.
+	 */
+	public Server transfer() throws IOException {
+		Singleton.debugPrint("Transferring Servers");
+		this.socket.setSoTimeout(3000);
+		String first = in.readLine();
+		String second = in.readLine();
+		Singleton.debugPrint("New Server: " + first + " " + second);
 
-	ServerInfo(String address, int port) {
-		this.address = address;
-		this.port = port;
-	}
-
-	int getPort() {
-		return this.port;
-	}
-
-	String getAddress() {
-		return this.address;
+		return new Server(new ServerInfo(first, Integer.parseInt(second)));
 	}
 
 }

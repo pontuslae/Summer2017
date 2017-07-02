@@ -1,5 +1,7 @@
-package Connection; /*
-	* Created on 21/06/2017.
+package Connection;
+
+/*
+	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,28 +24,55 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class ServerInfo {
+import External.Singleton;
 
-	private int port = 9005;
-	private String address = "localhost";
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
 
-	ServerInfo() {}
+public class Server {
 
-	ServerInfo(String address) {
-		this.address = address;
+	ServerInfo si;
+	Socket socket;
+	DataOutputStream out;
+	BufferedReader in;
+
+	Server() {
+		si = new ServerInfo();
 	}
 
-	ServerInfo(String address, int port) {
-		this.address = address;
-		this.port = port;
+	Server(ServerInfo si) {
+		this.si = si;
 	}
 
-	int getPort() {
-		return this.port;
+	Server(ServerInfo si, Socket socket) {
+		this.si = si;
+		this.socket = socket;
 	}
 
-	String getAddress() {
-		return this.address;
+	Server(Socket socket) {
+		this.socket = socket;
 	}
 
+	public void connect() throws Exception {
+		this.socket = new Socket(this.si.getAddress(), si.getPort());
+		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+		this.out = new DataOutputStream(this.socket.getOutputStream());
+	}
+	
+	private void verifySocket() throws Exception {
+		if (this.socket == null) {
+			this.connect();
+		} else if (!this.socket.isConnected()) {
+			this.connect();
+		}
+	}
+
+	public void send(String str) throws Exception {
+		this.verifySocket();
+
+		this.out.writeUTF(str);
+	}
 }

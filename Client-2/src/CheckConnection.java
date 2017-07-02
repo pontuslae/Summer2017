@@ -1,4 +1,6 @@
 import Connection.Connector;
+import Connection.GateServer;
+import Connection.Server;
 import External.Singleton;
 
 public class CheckConnection {
@@ -7,18 +9,16 @@ public class CheckConnection {
 		public void run() {
 			Singleton.debugPrint("Checking for server connection");
 
-			Connector connector = Main.getConnector();
+			GateServer gs = new GateServer();
+
 			try {
-				connector.connect();
+				gs.connect();
+				Server newServer = gs.transfer();
+				Main.setConnector(newServer);
 			} catch (Exception ex) {
 				Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
 				ConnectLayout.failedStatus = true;
-				return;
 			}
-
-			// Hangs the client while not connected.
-			while (!connector.isConnected());
 		}
-
 	}
 }
