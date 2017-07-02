@@ -75,7 +75,7 @@ public class MessageLayout implements Layout {
 
 				try {
 					Main.getConnector().send(messageField.getText());
-				} catch (IOException ex){
+				} catch (Exception ex){
 					Singleton.debugPrint("Couldn't send message", ex);
 				}
 

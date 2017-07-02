@@ -62,7 +62,17 @@ public class Server {
 		this.out = new DataOutputStream(this.socket.getOutputStream());
 	}
 
-	public void send(String str) throws IOException {
+	private void verifySocket() throws Exception {
+		if (this.socket == null) {
+			this.connect();
+		} else if (!this.socket.isConnected()) {
+			this.connect();
+		}
+	}
+
+	public void send(String str) throws Exception {
+		this.verifySocket();
+
 		this.out.writeUTF(str);
 	}
 }

@@ -39,8 +39,7 @@ public class GateServer extends Server {
 		String second = in.readLine();
 		Singleton.debugPrint("New Server: " + first + " " + second);
 
-		ServerInfo si = new ServerInfo(first, Integer.getInteger(second));
-		return new Server(si);
+		return new Server(new ServerInfo(first, Integer.parseInt(second)));
 	}
 
 }
