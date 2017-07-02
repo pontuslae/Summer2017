@@ -61,7 +61,7 @@ public class Server {
 		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		this.out = new DataOutputStream(this.socket.getOutputStream());
 	}
-
+	
 	private void verifySocket() throws Exception {
 		if (this.socket == null) {
 			this.connect();
