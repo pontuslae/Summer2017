@@ -21,13 +21,13 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Connector;
 import Connection.Server;
 import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+// TODO: 02/07/2017 Offload the functionality to another class so the main isn't cluttered.
 public class Main extends Application {
 
 	private Stage stage;
@@ -36,7 +36,7 @@ public class Main extends Application {
 
 	private static Main instance;
 
-	String storedName = "Undefined";
+	private String storedName = "Undefined";
 
 	public Main() {
 		instance = this;

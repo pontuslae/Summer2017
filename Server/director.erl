@@ -21,7 +21,8 @@ server(Port) ->
     {ok, Sock} = gen_tcp:accept(LSock),
     {ok, Bin} = do_recv(Sock, []),
     ok = gen_tcp:close(Sock),
-    Bin.
+    Sin = binary_to_list(Bin),
+	Sin.
 
 do_recv(Sock, Bs) ->
     case gen_tcp:recv(Sock, 0) of

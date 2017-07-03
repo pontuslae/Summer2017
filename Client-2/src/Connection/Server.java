@@ -24,8 +24,6 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -34,10 +32,11 @@ import java.net.Socket;
 
 public class Server {
 
-	ServerInfo si;
-	Socket socket;
-	DataOutputStream out;
-	BufferedReader in;
+	private ServerInfo si;              // A ServerInfo Class for holding where to connect to.
+	Socket socket;                      // A Socket that holds a TCP client.
+	DataOutputStream out;               // An output stream that transmits data to another socket.
+	BufferedReader in;                  /* A buffered input reader that converts binaries to strings. -
+										   And gets information from the socket. */
 
 	Server() {
 		si = new ServerInfo();
@@ -56,12 +55,20 @@ public class Server {
 		this.socket = socket;
 	}
 
+	/**
+	 * BInds the socket to the
+	 * @throws Exception
+	 */
 	public void connect() throws Exception {
 		this.socket = new Socket(this.si.getAddress(), si.getPort());
 		this.in = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 		this.out = new DataOutputStream(this.socket.getOutputStream());
 	}
-	
+
+	/**
+	 * Before interacting with the socket, make sure it works, otherwise throw an exception.
+	 * @throws Exception inherited from the connect() method.
+	 */
 	private void verifySocket() throws Exception {
 		if (this.socket == null) {
 			this.connect();
@@ -70,9 +77,22 @@ public class Server {
 		}
 	}
 
+	/**
+	 * Sends a message over the socket.
+	 * @param str the string to be sent.
+	 * @throws Exception inherited from verifySocket() and from the OutputStream.
+	 */
 	public void send(String str) throws Exception {
 		this.verifySocket();
-
 		this.out.writeUTF(str);
+		this.close();
+	}
+
+	/**
+	 * Closes the socket
+	 * @throws IOException if the socket cannot be accessed.
+	 */
+	public void close() throws IOException {
+		this.socket.close();
 	}
 }
