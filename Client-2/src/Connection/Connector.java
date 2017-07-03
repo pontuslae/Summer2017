@@ -24,6 +24,7 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Exceptions.NotOK;
 import External.Singleton;
 
 import java.io.IOException;

@@ -1,5 +1,5 @@
-package Connection; /*
-	* Created on 01/07/2017.
+package Exceptions; /*
+	* Created on 02/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,9 +22,9 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class NotOK extends Exception {
-	public NotOK() { super(); }
-	public NotOK(String message) { super(message); }
-	public NotOK(String message, Throwable cause) { super(message, cause); }
-	public NotOK(Throwable cause) { super(cause); }
+public class UserPrivilegesVilolated extends Exception {
+	public UserPrivilegesVilolated() { super(); }
+	public UserPrivilegesVilolated(String message) { super(message); }
+	public UserPrivilegesVilolated(String message, Throwable cause) { super(message, cause); }
+	public UserPrivilegesVilolated(Throwable cause) { super(cause); }
 }
