@@ -28,13 +28,36 @@ class Message {
 	private long time;          // The unix time when the message was sent.
 	private String message;     // The contents of the message.
 
+	Message(String poster, String message, long time){
+		this.poster = new User(poster);
+		this.message = message;
+		this.time = time;
+	}
+
 	Message(String poster, String message){
 		this.poster = new User(poster);
 		this.message = message;
+
+		// We only care about minutes and larger numbers.
+		this.time = System.currentTimeMillis()/(1000*60);
 	}
 
 	@Override
 	public String toString() {
-		return this.poster + ": " + this.message;
+		return this.getDate() + " | " + this.poster + ": " + this.message;
+	}
+
+	private String getDate() {
+
+		// We only care about minutes and larger numbers.
+		long currentDate = System.currentTimeMillis()/(1000*60);
+
+
+		// TODO: 02/07/2017 This math.
+		long pastMinutes = this.time % 60;
+		long pastHour = this.time % (60);
+
+
+		return "1969";
 	}
 }
