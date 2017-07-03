@@ -26,9 +26,9 @@ import Exceptions.UserPrivilegesViolated;
 import External.Singleton;
 
 public class User {
-	private String username;                // The name of the logged in user.
-	int privateKey = 0;                      // This key authenticates the user and is used as a signature.
 
+	private String username;                 // The name of the logged in user.
+	private int privateKey = 0;                      // This key authenticates the user and is used as a signature.
 
 	// Disallow users without any parameters to be initialized.
 	private User() {
@@ -52,7 +52,8 @@ public class User {
 		}
 	}
 
-	public int getPrivateKey() { // TODO: 02/07/2017 This does not seem secure.
+	// TODO: 02/07/2017 This does not seem secure.
+	public int getPrivateKey() {
 		return this.privateKey;
 	}
 

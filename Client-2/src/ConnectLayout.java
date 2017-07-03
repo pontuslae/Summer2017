@@ -41,7 +41,7 @@ public class ConnectLayout implements Layout {
 		Text scenetitle = new Text("Connecting.");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
-		
+
 		CheckConnection cc = new CheckConnection();
 		sync = new Thread(cc);
 		sync.start();
