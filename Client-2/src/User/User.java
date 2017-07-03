@@ -22,16 +22,14 @@ package User; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Exceptions.UserPrivilegesViolated;
 import External.Singleton;
 
 public class User {
 
 	private String username;                 // The name of the logged in user.
-	private int privateKey = 0;                      // This key authenticates the user and is used as a signature.
 
 	// Disallow users without any parameters to be initialized.
-	private User() {
+	User() {
 		Singleton.deny();
 	}
 
@@ -39,26 +37,7 @@ public class User {
 		this.username = username;
 	}
 
-	/**
-	 * Sets the private key for the user to communicate with the server with.
-	 * @param privateKey a String private key which should be received from a database.
-	 * @throws UserPrivilegesViolated when trying to set an already set key.
-	 */
-	public void setPrivateKey(int privateKey) throws UserPrivilegesViolated {
-		if (this.privateKey == 0) {
-			this.privateKey = privateKey;
-		} else {
-			throw new UserPrivilegesViolated("A private key can only be set once");
-		}
-	}
-
-	// TODO: 02/07/2017 This does not seem secure.
-	public int getPrivateKey() {
-		return this.privateKey;
-	}
-
 	public String getUsername() {
 		return this.username;
 	}
-
 }
