@@ -23,6 +23,7 @@ package User; /*
 */
 
 import Exceptions.NotOK;
+import Exceptions.UserPrivilegesViolated;
 import External.Singleton;
 
 public class User {
@@ -36,14 +37,19 @@ public class User {
 	}
 
 	User(String username) {
-
+		this.username = username;
 	}
 
-	public void setPrivateKey(String pk) throws NotOK {
+	/**
+	 * Sets the private key for the user to communicate with the server with.
+	 * @param privateKey a String private key which should be received from a database.
+	 * @throws UserPrivilegesViolated when trying to set an already set key.
+	 */
+	public void setPrivateKey(String privateKey) throws UserPrivilegesViolated {
 		if (this.privateKey == null) {
-			this.privateKey = pk;
+			this.privateKey = privateKey;
 		} else {
-			throw new NotOK("A private key can only be set once");
+			throw new UserPrivilegesViolated("A private key can only be set once");
 		}
 	}
 

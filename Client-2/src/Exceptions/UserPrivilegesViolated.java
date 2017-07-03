@@ -22,9 +22,9 @@ package Exceptions; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-public class UserPrivilegesVilolated extends Exception {
-	public UserPrivilegesVilolated() { super(); }
-	public UserPrivilegesVilolated(String message) { super(message); }
-	public UserPrivilegesVilolated(String message, Throwable cause) { super(message, cause); }
-	public UserPrivilegesVilolated(Throwable cause) { super(cause); }
+public class UserPrivilegesViolated extends Exception {
+	public UserPrivilegesViolated() { super(); }
+	public UserPrivilegesViolated(String message) { super(message); }
+	public UserPrivilegesViolated(String message, Throwable cause) { super(message, cause); }
+	public UserPrivilegesViolated(Throwable cause) { super(cause); }
 }
