@@ -1,5 +1,7 @@
+package Message;
+
 /*
-	* Created on 01/07/2017.
+	* Created on 03/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,35 +24,19 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.GateServer;
-import Connection.Server;
-import External.Singleton;
+// TODO: 03/07/2017 Expland to work with pictures.
+class MessageContent {
+	Object content;
 
-import java.net.ConnectException;
+	MessageContent() {}
 
+	MessageContent(Object content) {
+		this.content = content;
+	}
 
-/**
- * Connects to the sever on a background Thread to not interrupt the users control flow.
- */
-class CheckConnection extends Thread {
-	public void run() {
-		Singleton.debugPrint("Checking for a authentication server connection");
-
-		GateServer gs = new GateServer();                       // Init. a gate server that authenticates the user.
-
-
-		try {
-			gs.connect();
-			Server newServer = gs.transfer();
-			Main.setConnector(newServer);
-		} catch (ConnectException ex) {
-			// If an Exception is caught, notify the user and revert back to the start screen.
-
-			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
-			ConnectLayout.failedStatus = true;
-		} catch (Exception ex) {
-			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
-		}
+	@Override
+	public String toString() {
+		return this.content.toString();
 	}
 
 }

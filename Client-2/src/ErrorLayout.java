@@ -36,6 +36,14 @@ import java.awt.event.ActionListener;
 
 public class ErrorLayout implements Layout {
 
+	String error;
+
+	ErrorLayout() {}
+
+	ErrorLayout(String error){
+		this.error = error;
+	}
+
 	public Scene get() {
 		return get(0);
 	}

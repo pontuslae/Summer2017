@@ -26,17 +26,17 @@ import User.User;
 public class Message {
 	private User poster;        // The person who sent the message
 	private long time;          // The unix time when the message was sent.
-	private String message;     // The contents of the message.
+	private MessageContent message;     // The contents of the message.
 
-	public Message(String poster, String message, long time){
+	public Message(String poster, Object message, long time){
 		this.poster = new User(poster);
-		this.message = message;
+		this.message = new MessageContent(message);
 		this.time = time;
 	}
 
 	public Message(String poster, String message){
 		this.poster = new User(poster);
-		this.message = message;
+		this.message = new MessageContent(message);
 
 		// We only care about minutes and larger numbers.
 		this.time = System.currentTimeMillis()/(1000*60);

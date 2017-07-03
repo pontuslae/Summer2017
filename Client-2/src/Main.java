@@ -62,7 +62,7 @@ public class Main extends Application {
 	public void fromConnectLayout() {
 
 		Singleton.debugPrint("FromConnectLayout");
-		// Hangs while sync is alive.
+		// Hangs while sync is alive. // TODO: 03/07/2017 Improve on this. 
 		while (ConnectLayout.sync.isAlive()){
 			if (ConnectLayout.failedStatus) {
 				// TODO: 21/06/2017 Handle this exception better.
@@ -75,6 +75,10 @@ public class Main extends Application {
 
 	void gotoFailedLayout() {
 		this.stage.setScene(new ErrorLayout().get());
+	}
+
+	void gotoFailedLayout(String str) {
+		this.stage.setScene(new ErrorLayout(str).get());
 	}
 
 	void gotoMessageLayout(String str){
