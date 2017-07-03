@@ -33,6 +33,7 @@ public class ConnectLayout implements Layout {
 
 	static Thread sync;
 	static boolean failedStatus = false;
+	static String failedMessage;
 
 	public Scene get() {
 

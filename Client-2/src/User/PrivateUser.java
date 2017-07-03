@@ -1,4 +1,5 @@
-/*
+package User; /*
+	* Created on 02/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -21,17 +22,31 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-class Message {
-	private String poster; // The username who sent the message.
-	private String message; // The contents of the message.
+import Exceptions.UserPrivilegesViolated;
 
-	Message(String p, String m){
-		this.poster = p;
-		this.message = m;
+public class PrivateUser extends User {
+
+	private int privateKey = 0;                      // This key authenticates the PrivateUser and is used as a signature.
+
+	public PrivateUser(String username) {
+		this.username = username;
 	}
 
-	@Override
-	public String toString() {
-		return this.poster + ": " + this.message;
+	/**
+	 * Sets the private key for the PrivateUser to communicate with the server with.
+	 * @param privateKey a String private key which should be received from a database.
+	 * @throws UserPrivilegesViolated when trying to set an already set key.
+	 */
+	public void setPrivateKey(int privateKey) throws UserPrivilegesViolated {
+		if (this.privateKey == 0) {
+			this.privateKey = privateKey;
+		} else {
+			throw new UserPrivilegesViolated("A private key can only be set once");
+		}
+	}
+
+	// TODO: 02/07/2017 This does not seem secure.
+	public int getPrivateKey() {
+		return this.privateKey;
 	}
 }

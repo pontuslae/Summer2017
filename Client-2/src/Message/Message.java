@@ -1,5 +1,4 @@
-package User; /*
-	* Created on 02/07/2017.
+package Message;/*
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,19 +21,43 @@ package User; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
+import User.User;
 
-public class User {
+public class Message {
+	private User poster;        // The person who sent the message
+	private long time;          // The unix time when the message was sent.
+	private MessageContent message;     // The contents of the message.
 
-	String username;
-
-	User() {}
-
-	public User(String username) {
-		this.username = username;
+	public Message(String poster, Object message, long time){
+		this.poster = new User(poster);
+		this.message = new MessageContent(message);
+		this.time = time;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public Message(String poster, String message){
+		this.poster = new User(poster);
+		this.message = new MessageContent(message);
+
+		// We only care about minutes and larger numbers.
+		this.time = System.currentTimeMillis()/(1000*60);
+	}
+
+	@Override
+	public String toString() {
+		return this.getDate() + " | " + this.poster + ": " + this.message;
+	}
+
+	private String getDate() {
+
+		// We only care about minutes and larger numbers.
+		long currentDate = System.currentTimeMillis()/(1000*60);
+
+
+		// TODO: 02/07/2017 This math.
+		long pastMinutes = this.time % 60;
+		long pastHour = this.time % (60);
+
+
+		return "1969";
 	}
 }

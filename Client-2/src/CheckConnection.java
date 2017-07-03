@@ -26,6 +26,8 @@ import Connection.GateServer;
 import Connection.Server;
 import External.Singleton;
 
+import java.net.ConnectException;
+
 
 /**
  * Connects to the sever on a background Thread to not interrupt the users control flow.
@@ -36,15 +38,21 @@ class CheckConnection extends Thread {
 
 		GateServer gs = new GateServer();                       // Init. a gate server that authenticates the user.
 
-
 		try {
 			gs.connect();
 			Server newServer = gs.transfer();
 			Main.setConnector(newServer);
-		} catch (Exception ex) {
-			// If an Exception is caught, notify the user and revert back to the start screen.
 
+			// If an Exception is caught, notify the user and revert back to the start screen.
+		} catch (ConnectException ex) {
+
+			Singleton.debugPrint("A ConnectException was thrown when connecting to the socket", ex);
+			ConnectLayout.failedMessage = ex.getMessage();
+			ConnectLayout.failedStatus = true;
+		} catch (Exception ex) {
 			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
+
+			ConnectLayout.failedMessage = ex.getMessage();
 			ConnectLayout.failedStatus = true;
 		}
 	}

@@ -1,5 +1,7 @@
-package User; /*
-	* Created on 02/07/2017.
+package Message;
+
+/*
+	* Created on 03/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,19 +24,19 @@ package User; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
+// TODO: 03/07/2017 Expland to work with pictures.
+class MessageContent {
+	Object content;
 
-public class User {
+	MessageContent() {}
 
-	String username;
-
-	User() {}
-
-	public User(String username) {
-		this.username = username;
+	MessageContent(Object content) {
+		this.content = content;
 	}
 
-	public String getUsername() {
-		return this.username;
+	@Override
+	public String toString() {
+		return this.content.toString();
 	}
+
 }
