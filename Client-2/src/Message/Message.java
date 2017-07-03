@@ -1,4 +1,4 @@
-/*
+package Message;/*
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -23,18 +23,18 @@
 
 import User.User;
 
-class Message {
+public class Message {
 	private User poster;        // The person who sent the message
 	private long time;          // The unix time when the message was sent.
 	private String message;     // The contents of the message.
 
-	Message(String poster, String message, long time){
+	public Message(String poster, String message, long time){
 		this.poster = new User(poster);
 		this.message = message;
 		this.time = time;
 	}
 
-	Message(String poster, String message){
+	public Message(String poster, String message){
 		this.poster = new User(poster);
 		this.message = message;
 

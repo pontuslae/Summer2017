@@ -21,20 +21,17 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Connector;
 import External.Singleton;
+import Message.Message;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MessageLayout implements Layout {
@@ -69,7 +66,7 @@ public class MessageLayout implements Layout {
 	private void sendMessage(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 
-			Singleton.debugPrint("Send Message: " + messageField.getText());
+			Singleton.debugPrint("Send Message.Message: " + messageField.getText());
 
 			if (validMessage(messageField.getText())){
 
