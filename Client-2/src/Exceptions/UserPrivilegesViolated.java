@@ -1,5 +1,5 @@
-/*
-	* Created on 21/06/2017.
+package Exceptions; /*
+	* Created on 02/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,32 +22,9 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-
-public class ConnectLayout implements Layout {
-
-	static Thread sync;
-	static boolean failedStatus = false;
-
-	public Scene get() {
-
-		GridPane grid = Singleton.getDefaultGridPane();
-
-		Text scenetitle = new Text("Connecting.");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 1, 0, 2, 1);
-
-		CheckConnection cc = new CheckConnection();
-		sync = new Thread(cc);
-		sync.start();
-
-		return new Scene(grid, 300, 275);
-	}
-
+public class UserPrivilegesViolated extends Exception {
+	public UserPrivilegesViolated() { super(); }
+	public UserPrivilegesViolated(String message) { super(message); }
+	public UserPrivilegesViolated(String message, Throwable cause) { super(message, cause); }
+	public UserPrivilegesViolated(Throwable cause) { super(cause); }
 }
-

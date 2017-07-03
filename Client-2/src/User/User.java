@@ -1,5 +1,5 @@
-/*
-	* Created on 21/06/2017.
+package User; /*
+	* Created on 02/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -22,32 +22,43 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Exceptions.UserPrivilegesViolated;
 import External.Singleton;
-import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
-public class ConnectLayout implements Layout {
+public class User {
 
-	static Thread sync;
-	static boolean failedStatus = false;
+	private String username;                 // The name of the logged in user.
+	private int privateKey = 0;                      // This key authenticates the user and is used as a signature.
 
-	public Scene get() {
+	// Disallow users without any parameters to be initialized.
+	private User() {
+		Singleton.deny();
+	}
 
-		GridPane grid = Singleton.getDefaultGridPane();
+	public User(String username) {
+		this.username = username;
+	}
 
-		Text scenetitle = new Text("Connecting.");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 1, 0, 2, 1);
+	/**
+	 * Sets the private key for the user to communicate with the server with.
+	 * @param privateKey a String private key which should be received from a database.
+	 * @throws UserPrivilegesViolated when trying to set an already set key.
+	 */
+	public void setPrivateKey(int privateKey) throws UserPrivilegesViolated {
+		if (this.privateKey == 0) {
+			this.privateKey = privateKey;
+		} else {
+			throw new UserPrivilegesViolated("A private key can only be set once");
+		}
+	}
 
-		CheckConnection cc = new CheckConnection();
-		sync = new Thread(cc);
-		sync.start();
+	// TODO: 02/07/2017 This does not seem secure.
+	public int getPrivateKey() {
+		return this.privateKey;
+	}
 
-		return new Scene(grid, 300, 275);
+	public String getUsername() {
+		return this.username;
 	}
 
 }
-
