@@ -26,9 +26,8 @@ import External.Singleton;
 
 public class User {
 
-	String username;                 // The name of the logged in user.
+	String username;
 
-	// Disallow users without any parameters to be initialized.
 	User() {}
 
 	public User(String username) {

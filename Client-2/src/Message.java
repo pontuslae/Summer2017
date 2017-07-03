@@ -24,8 +24,9 @@
 import User.User;
 
 class Message {
-	private User poster; // The person who sent the message
-	private String message; // The contents of the message.
+	private User poster;        // The person who sent the message
+	private long time;          // The unix time when the message was sent.
+	private String message;     // The contents of the message.
 
 	Message(String poster, String message){
 		this.poster = new User(poster);
