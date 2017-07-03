@@ -90,7 +90,7 @@ public class Server {
 	}
 
 	public String read() throws IOException {
-		this.read(50);
+		return this.read(150);
 	}
 
 	public String read(int nrbytes) throws IOException {
