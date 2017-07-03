@@ -27,9 +27,9 @@ class Message {
 	private User poster; // The person who sent the message
 	private String message; // The contents of the message.
 
-	Message(String p, String m){
-		this.poster = p;
-		this.message = m;
+	Message(String poster, String message){
+		this.poster = new User(poster);
+		this.message = message;
 	}
 
 	@Override

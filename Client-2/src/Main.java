@@ -26,7 +26,7 @@ import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import User.User;
+import User.PrivateUser;
 
 // TODO: 02/07/2017 Offload the functionality to another class so the main isn't cluttered.
 public class Main extends Application {
@@ -37,7 +37,7 @@ public class Main extends Application {
 
 	private static Main instance;
 
-	private User user;
+	private PrivateUser user;
 
 	public Main() {
 		instance = this;
@@ -78,7 +78,7 @@ public class Main extends Application {
 	}
 
 	void gotoMessageLayout(String str){
-		this.user = new User(str);
+		this.user = new PrivateUser(str);
 		this.stage.setScene(new MessageLayout(str).get());
 	}
 
@@ -88,7 +88,7 @@ public class Main extends Application {
 	}
 
 	void gotoConnectLayout(String str){
-		this.user = new User(str);
+		this.user = new PrivateUser(str);
 		this.stage.setScene(new ConnectLayout().get());
 		Main.getInstance().fromConnectLayout();
 	}

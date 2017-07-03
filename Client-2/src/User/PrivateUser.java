@@ -28,6 +28,10 @@ public class PrivateUser extends User {
 
 	private int privateKey = 0;                      // This key authenticates the PrivateUser and is used as a signature.
 
+	public PrivateUser(String username) {
+		this.username = username;
+	}
+
 	/**
 	 * Sets the private key for the PrivateUser to communicate with the server with.
 	 * @param privateKey a String private key which should be received from a database.
