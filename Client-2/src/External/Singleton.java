@@ -49,7 +49,14 @@ public class Singleton {
 	 * @return the default font used for none input text.
 	 */
 	public static Font getDefaultFont(){
-		return Font.font("Tahoma", FontWeight.NORMAL, 16);
+		return getDefaultFont(16);
+	}
+
+	/**
+	 * @return the default font used for none input text.
+	 */
+	public static Font getDefaultFont(int fontSize){
+		return Font.font("Tahoma", FontWeight.NORMAL, fontSize);
 	}
 
 	public static GridPane getDefaultGridPane(){

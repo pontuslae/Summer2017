@@ -29,6 +29,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Server {
 
@@ -86,6 +87,39 @@ public class Server {
 		this.verifySocket();
 		this.out.writeUTF(str);
 		this.close();
+	}
+
+	public String read() throws IOException {
+		this.read(50);
+	}
+
+	public String read(int nrbytes) throws IOException {
+		int[] recv = new int[nrbytes];
+
+		// O(N)
+		for (int i = 0; i < nrbytes; i++) {
+			int bte = this.in.read();
+
+			if (bte == -1) {
+				return intArrayToString(Arrays.copyOf(recv, 0));
+			}
+			recv[i] = this.in.read();
+		}
+
+		return intArrayToString(recv);
+	}
+
+	/**
+	 * Converts an integer array to a String of characters.
+	 * @param original the integer array
+	 * @return a String of characters from the integer values.
+	 */
+	private String intArrayToString(int[] original) {
+		String str = "";
+		for (int val: original) {
+			str += (char) val;
+		}
+		return str;
 	}
 
 	/**

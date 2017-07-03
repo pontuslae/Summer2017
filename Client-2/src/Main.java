@@ -66,7 +66,7 @@ public class Main extends Application {
 		while (ConnectLayout.sync.isAlive()){
 			if (ConnectLayout.failedStatus) {
 				// TODO: 21/06/2017 Handle this exception better.
-				Main.getInstance().gotoFailedLayout();
+				Main.getInstance().gotoFailedLayout(ConnectLayout.failedMessage);
 				return;
 			}
 		}

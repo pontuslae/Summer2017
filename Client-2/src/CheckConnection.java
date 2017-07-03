@@ -38,18 +38,22 @@ class CheckConnection extends Thread {
 
 		GateServer gs = new GateServer();                       // Init. a gate server that authenticates the user.
 
-
 		try {
 			gs.connect();
 			Server newServer = gs.transfer();
 			Main.setConnector(newServer);
-		} catch (ConnectException ex) {
-			// If an Exception is caught, notify the user and revert back to the start screen.
 
-			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
+			// If an Exception is caught, notify the user and revert back to the start screen.
+		} catch (ConnectException ex) {
+
+			Singleton.debugPrint("A ConnectException was thrown when connecting to the socket", ex);
+			ConnectLayout.failedMessage = ex.getMessage();
 			ConnectLayout.failedStatus = true;
 		} catch (Exception ex) {
 			Singleton.debugPrint("An Exception was thrown when connecting to the socket", ex);
+
+			ConnectLayout.failedMessage = ex.getMessage();
+			ConnectLayout.failedStatus = true;
 		}
 	}
 

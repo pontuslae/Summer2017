@@ -23,16 +23,10 @@
 */
 
 import External.Singleton;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ErrorLayout implements Layout {
 
@@ -51,21 +45,12 @@ public class ErrorLayout implements Layout {
 	public Scene get(int errorCode) {
 		GridPane grid = Singleton.getDefaultGridPane();
 
-		Text scenetitle = new Text("Sorry, It's not working :(");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 1, 0, 2, 1);
+		Text sceneTitle = new Text("Sorry, It's not working :(");
+		sceneTitle.setFont(Singleton.getDefaultFont());
+		grid.add(sceneTitle, 1, 0, 2, 1);
 
-		String errorText = "Error " + errorCode + ": ";
-		switch (errorCode) {
-			case 0:
-				errorText += "No Socket found.";
-				break;
-			default:
-				errorText += "Unspecified error.";
-		}
-
-		Text errorSubText = new Text(errorText);
-		errorSubText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		Text errorSubText = new Text(this.error);
+		errorSubText.setFont(Singleton.getDefaultFont(12));
 		grid.add(errorSubText, 1, 0, 2, 7);
 
 		Button goBack = new Button("Go Back");
@@ -79,7 +64,5 @@ public class ErrorLayout implements Layout {
 
 		return new Scene(grid, 300, 275);
 	}
-
-
 
 }
