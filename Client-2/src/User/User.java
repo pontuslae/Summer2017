@@ -22,21 +22,20 @@ package User; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Exceptions.NotOK;
 import Exceptions.UserPrivilegesViolated;
 import External.Singleton;
 
 public class User {
 	private String username;                // The name of the logged in user.
-	String privateKey;                      // This key authenticates the user and is used as a signature.
+	int privateKey = 0;                      // This key authenticates the user and is used as a signature.
 
 
 	// Disallow users without any parameters to be initialized.
-	User() {
+	private User() {
 		Singleton.deny();
 	}
 
-	User(String username) {
+	public User(String username) {
 		this.username = username;
 	}
 
@@ -45,12 +44,16 @@ public class User {
 	 * @param privateKey a String private key which should be received from a database.
 	 * @throws UserPrivilegesViolated when trying to set an already set key.
 	 */
-	public void setPrivateKey(String privateKey) throws UserPrivilegesViolated {
-		if (this.privateKey == null) {
+	public void setPrivateKey(int privateKey) throws UserPrivilegesViolated {
+		if (this.privateKey == 0) {
 			this.privateKey = privateKey;
 		} else {
 			throw new UserPrivilegesViolated("A private key can only be set once");
 		}
+	}
+
+	public int getPrivateKey() { // TODO: 02/07/2017 This does not seem secure.
+		return this.privateKey;
 	}
 
 	public String getUsername() {
