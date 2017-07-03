@@ -1,4 +1,4 @@
-package Connection; /*
+package Exceptions; /*
 	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*

@@ -21,13 +21,14 @@
 * WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Connector;
 import Connection.Server;
 import External.Singleton;
 import External.Timer;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import User.User;
 
+// TODO: 02/07/2017 Offload the functionality to another class so the main isn't cluttered.
 public class Main extends Application {
 
 	private Stage stage;
@@ -36,7 +37,7 @@ public class Main extends Application {
 
 	private static Main instance;
 
-	String storedName = "Undefined";
+	private User user;
 
 	public Main() {
 		instance = this;
@@ -64,14 +65,12 @@ public class Main extends Application {
 		// Hangs while sync is alive.
 		while (ConnectLayout.sync.isAlive()){
 			if (ConnectLayout.failedStatus) {
-				// TODO: 21/06/2017 Handle this exception better. 
-				System.out.println("Failed to connect to socket! Exiting"); // No debugprint is intentional
+				// TODO: 21/06/2017 Handle this exception better.
 				Main.getInstance().gotoFailedLayout();
 				return;
 			}
 		}
-		Singleton.debugPrint("Sync confirmed, Thread dead.");
-		Main.getInstance().gotoMessageLayout(storedName);
+		Main.getInstance().gotoMessageLayout(user.getUsername());
 	}
 
 	void gotoFailedLayout() {
@@ -79,16 +78,17 @@ public class Main extends Application {
 	}
 
 	void gotoMessageLayout(String str){
-		storedName = str;
+		this.user = new User(str);
 		this.stage.setScene(new MessageLayout(str).get());
 	}
 
 	void gotoMessageLayout(){
-		this.stage.setScene(new MessageLayout(storedName).get());
+		MessageLayout ms = new MessageLayout(user.getUsername());
+		this.stage.setScene((ms).get());
 	}
 
 	void gotoConnectLayout(String str){
-		storedName = str;
+		this.user = new User(str);
 		this.stage.setScene(new ConnectLayout().get());
 		Main.getInstance().fromConnectLayout();
 	}

@@ -1,4 +1,5 @@
-/*
+package Exceptions; /*
+	* Created on 02/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -21,10 +22,9 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import javafx.scene.Scene;
-
-interface Layout {
-
-	Scene get();
-
+public class UserPrivilegesViolated extends Exception {
+	public UserPrivilegesViolated() { super(); }
+	public UserPrivilegesViolated(String message) { super(message); }
+	public UserPrivilegesViolated(String message, Throwable cause) { super(message, cause); }
+	public UserPrivilegesViolated(Throwable cause) { super(cause); }
 }
