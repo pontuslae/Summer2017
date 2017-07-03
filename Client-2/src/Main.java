@@ -99,7 +99,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Timer timer = new Timer(1000);
+		Timer timer = new Timer(10);
 		primaryStage.setTitle("Client");
 		primaryStage.centerOnScreen();
 
