@@ -22,17 +22,31 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import External.Singleton;
+import Layout.MainLayout;
+
 public class ListenServer extends Thread { // TODO: 05/07/2017 Class.
 	/*
 	The Purpose of this class is to handle listening for receiving data in the background and make connection
 	with the server from time to time to make sure you are still conneted.
 	 */
 
-	DataServer dataserver;
+	private Server dataserver;
 
 	@Override
 	public void run() {
-		DataServer.getInstance();
+		this.dataserver = DataServer.getInstance();
+
+		while (!this.dataserver.socket.isClosed()) {     // While the socket is open.
+			Singleton.debugPrint("Socket is not closed.");
+			Singleton.sleep(500);
+		}
+
+		Singleton.debugPrint("Socket is closed.");
+
+		// Notify the Server that it's dead. And the user.
+		Server.getInstance().socket = null; // If the socket is null it will attempt to reconnect it internally.
+		MainLayout.getInstance().gotoFailedLayout("Disconnected");
 
 	}
 }

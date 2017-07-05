@@ -75,7 +75,7 @@ public class MainLayout extends Application {
 		this.stage.setScene(new ErrorLayout().get());
 	}
 
-	void gotoFailedLayout(String str) {
+	public void gotoFailedLayout(String str) {
 		this.stage.setScene(new ErrorLayout(str).get());
 	}
 
