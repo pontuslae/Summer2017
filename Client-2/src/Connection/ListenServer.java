@@ -32,12 +32,15 @@ public class ListenServer extends Thread { // TODO: 05/07/2017 Class.
 	 */
 
 	private Server dataserver;
+	private static ListenServer single;
 
 	@Override
 	public void run() {
 		this.dataserver = DataServer.getInstance();
+		single = this;
 
 		while (!this.dataserver.socket.isClosed()) {     // While the socket is open.
+			if (single != this) break;                   // If there exists more than one instant of this. Kill it.
 			Singleton.debugPrint("Socket is not closed.");
 			Singleton.sleep(500);
 		}
