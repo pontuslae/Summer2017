@@ -24,11 +24,38 @@ package Register;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import External.Singleton;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 
 public class RegisterLayout implements Layout {
 
 	public Scene get() {
+
+		GridPane grid = Singleton.getDefaultGridPane();
+
+		Text sceneTitle = new Text("Sorry, It's not working :(");
+		sceneTitle.setFont(Singleton.getDefaultFont());
+		grid.add(sceneTitle, 1, 0, 2, 1);
+
+		Text errorSubText = new Text(this.error);
+		errorSubText.setFont(Singleton.getDefaultFont(12));
+		grid.add(errorSubText, 1, 0, 2, 7);
+
+		Button goBack = new Button("Go Back");
+
+		goBack.setOnAction((event) -> {
+			Main.getInstance().gotoStartLayout();
+		});
+		goBack.isDefaultButton();
+
+		grid.add(goBack, 1, 0, 2, 15);
+
+		return new Scene(grid, 300, 275);
+
+
 
 	}
 
