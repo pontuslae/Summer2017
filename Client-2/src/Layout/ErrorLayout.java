@@ -56,7 +56,7 @@ public class ErrorLayout implements Layout {
 		Button goBack = new Button("Go Back");
 
 		goBack.setOnAction((event) -> {
-			Main.getInstance().gotoStartLayout();
+			MainLayout.getInstance().gotoStartLayout();
 		});
 		goBack.isDefaultButton();
 

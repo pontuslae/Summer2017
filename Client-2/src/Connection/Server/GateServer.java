@@ -28,7 +28,7 @@ import Layout.MainLayout;
 import java.io.IOException;
 
 public class GateServer extends Server {
-	
+
 	@Override
 	public void run() {
 		try {
