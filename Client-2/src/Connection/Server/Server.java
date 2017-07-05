@@ -1,4 +1,4 @@
-package Connection;
+package Connection.Server;
 
 /*
 	* Created on 01/07/2017.
@@ -24,45 +24,59 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class Server {
+public class Server extends Thread {
 
 	private ServerInfo si;              // A ServerInfo Class for holding where to connect to.
 	Socket socket;                      // A Socket that holds a TCP client.
-	DataOutputStream out;               // An output stream that transmits data to another socket.
-	BufferedReader in;                  /* A buffered input reader that converts binaries to strings. -
+	private DataOutputStream out;               // An output stream that transmits data to another socket.
+	private BufferedReader in;                  /* A buffered input reader that converts binaries to strings. -
 										   And gets information from the socket. */
-	static Server instance;
+	private static Server instance;
+
+	@Override
+	public void run() {
+		super.run();
+	}
 
 	public static Server getInstance() {
 		return instance;
 	}
 
-	Server() {
+	public Server() {
 		si = new ServerInfo();
 		this.instance = this;
 	}
 
-	Server(ServerInfo si) {
+	public Server(ServerInfo si) {
 		this.si = si;
 		this.instance = this;
 	}
 
-	Server(ServerInfo si, Socket socket) {
+	public Server(ServerInfo si, Socket socket) {
 		this.si = si;
 		this.socket = socket;
 		this.instance = this;
 	}
 
-	Server(Socket socket) {
+	public Server(Socket socket) {
 		this.socket = socket;
 		this.instance = this;
+	}
+
+	public Socket getSocket() {
+		return this.socket;
+	}
+
+	public BufferedReader getIn() {
+		return this.in;
+	}
+
+	public DataOutputStream getOut() { // get out, get it? It's a pun.
+		return this.out;
 	}
 
 	/**
@@ -85,6 +99,13 @@ public class Server {
 		} else if (!this.socket.isConnected()) {
 			this.connect();
 		}
+	}
+
+	/**
+	 * Sets the object's Socket to null.
+	 */
+	public void nullifySocket() {
+		this.socket = null;
 	}
 
 	/**

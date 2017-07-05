@@ -22,8 +22,8 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.GateServer;
-import Connection.Server;
+import Connection.Server.GateServer;
+import Connection.Server.Server;
 import External.Singleton;
 import Layout.ConnectLayout;
 

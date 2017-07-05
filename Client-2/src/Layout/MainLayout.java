@@ -24,7 +24,7 @@ package Layout;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Server;
+import Connection.Server.Server;
 import External.Singleton;
 import External.Timer;
 import User.PrivateUser;
@@ -35,7 +35,7 @@ public class MainLayout extends Application {
 
 	private Stage stage;
 
-	private static Connection.Server server = new Connection.Connector();
+	private static Server server;
 
 	private static MainLayout instance;
 
@@ -45,11 +45,11 @@ public class MainLayout extends Application {
 		instance = this;
 	}
 
-	public static Connection.Server getConnector() {
+	public static Server getServer() {
 		return server;
 	}
 
-	public static void setConnector(Server ser) {
+	public static void setServer(Server ser) {
 		server = ser;
 	}
 

@@ -24,12 +24,7 @@ package Layout;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import External.Singleton;
-import Register.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Text;
 
 public class RegisterLayout implements Layout {
 

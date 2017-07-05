@@ -21,7 +21,6 @@ package Layout;/*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Connector;
 import Connection.IgnoreThisTCP;
 import External.Singleton;
 import javafx.scene.Scene;

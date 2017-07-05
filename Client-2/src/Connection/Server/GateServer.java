@@ -1,4 +1,4 @@
-package Connection; /*
+package Connection.Server; /*
 	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
@@ -23,10 +23,20 @@ package Connection; /*
 */
 
 import External.Singleton;
+import Layout.MainLayout;
 
 import java.io.IOException;
 
 public class GateServer extends Server {
+	
+	@Override
+	public void run() {
+		try {
+			MainLayout.setServer(transfer());
+		} catch (IOException ex) {
+			MainLayout.getInstance().gotoFailedLayout("Couldn't find a server.");
+		}
+	}
 
 	/**
 	 * @return a new server where the data should be sent.
@@ -37,8 +47,8 @@ public class GateServer extends Server {
 		this.socket.setSoTimeout(3000);
 
 		// TODO: 05/07/2017 This has been tested, but needs more verification on the client end.
-		String first = in.readLine();
-		String second = in.readLine();
+		String first = this.getIn().readLine();
+		String second = this.getIn().readLine();
 		Singleton.debugPrint("New Server: " + first + " " + second);
 
 		return new Server(new ServerInfo(first, Integer.parseInt(second)));

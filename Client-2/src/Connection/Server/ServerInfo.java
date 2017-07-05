@@ -1,4 +1,4 @@
-package Connection; /*
+package Connection.Server; /*
 	* Created on 21/06/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*

@@ -22,12 +22,15 @@ package Layout;/*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.Server.GateServer;
 import External.Singleton;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+
+import java.io.IOException;
 
 public class ConnectLayout implements Layout {
 
@@ -43,8 +46,7 @@ public class ConnectLayout implements Layout {
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
 		grid.add(scenetitle, 1, 0, 2, 1);
 
-		CheckConnection cc = new CheckConnection();
-		sync = new Thread(cc);
+		sync = new Thread(new GateServer());
 		sync.start();
 
 		return new Scene(grid, 300, 275);

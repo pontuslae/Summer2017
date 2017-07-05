@@ -1,7 +1,5 @@
-package Connection;
-
-/*
-	* Created on 21/06/2017.
+package Connection.Server; /*
+	* Created on 01/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -24,12 +22,15 @@ package Connection;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import Connection.IgnoreThisTCP;
 import Exceptions.NotOK;
 import External.Singleton;
 
 import java.io.IOException;
 
-public class Connector extends Server {
+public class DataServer extends Server {
+
+	// Let it have a ListenServer and share socket.
 
 	private static final int OK_INDICATOR = 1;
 	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
@@ -41,7 +42,7 @@ public class Connector extends Server {
 		int handshake = 0;
 
 		for (int i = 0; i < 1000; i++){
-			handshake = in.read();
+			handshake = this.getIn().read();
 
 			// If the byte is end of stream byte, loop 1000 bytes, to see if we can get a better one.
 			if (handshake != -1) break;
@@ -72,7 +73,7 @@ public class Connector extends Server {
 				Singleton.debugPrint("Starting mock instance");
 				IgnoreThisTCP.getInstance().mock(str, OK_INDICATOR);
 			} else {
-				this.out.writeUTF(str + '\n');
+				this.getOut().writeUTF(str + '\n');
 			}
 
 			done();
@@ -87,7 +88,7 @@ public class Connector extends Server {
 				connect();
 
 				Singleton.debugPrint("Sending the command again");
-				this.out.writeUTF(str + '\n');
+				this.getOut().writeUTF(str + '\n');
 
 			} catch (Exception e) {
 				Singleton.debugPrint("Exception thrown when sending ");
