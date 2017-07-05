@@ -1,4 +1,4 @@
-/*
+package Layout;/*
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -55,13 +55,15 @@ public class StartLayout implements Layout {
 		inputField = new TextField();
 		grid.add(inputField, 1, 1);
 		inputField.addEventFilter(KeyEvent.KEY_TYPED, this::inputFieldListener);
-		return new Scene(grid, 300, 275);
+		Scene start = new Scene(grid, 300, 275);
+
+		return start;
 	}
 
 	private void inputFieldListener(KeyEvent e){
 		if ((int) (e.getCharacter().charAt(0)) == Singleton.NEW_LINE){ // New line
 			if (validUserName(inputField.getText())){
-				Singleton.debugTransitionPrint("StartLayout", "MessageLayout");
+				Singleton.debugTransitionPrint("Layout.StartLayout", "Layout.MessageLayout");
 
 				Main.getInstance().gotoConnectLayout(inputField.getText());
 			}

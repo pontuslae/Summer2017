@@ -29,8 +29,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.util.Collections;
-
 public class Singleton {
 
 	public static final int NEW_LINE = 13;
@@ -39,9 +37,9 @@ public class Singleton {
 
 	public static void deny(){
 		try {
-			throw new Exception("Can't instantiate an empty MessageLayout");
+			throw new Exception("Can't instantiate an empty Layout.MessageLayout");
 		} catch (Exception ex) {
-			throw new Error("Can't instantiate an empty MessageLayout - Unable to throw Exception.");
+			throw new Error("Can't instantiate an empty Layout.MessageLayout - Unable to throw Exception.");
 		}
 	}
 
@@ -77,10 +75,9 @@ public class Singleton {
 
 	public static void debugPrint(String s, Exception ex) { // TODO: 21/06/2017 handle exceptions
 		// TODO: 15/06/2017 expand to introduce proper logs.
-		if (debug) {
-			System.out.println("DP: " + s);
+		debugPrint(s);
+		if (debug)
 			ex.printStackTrace();
-		}
 	}
 
 	public static void debugTransitionPrint(String... str) {
@@ -93,6 +90,12 @@ public class Singleton {
 			System.out.println("DP: " + combinedString);
 		}
 
+	}
+
+	// TODO: 05/07/2017 This is a lazy implementation. Improve it.
+	public static void sleep(int value) {
+		long t1 = System.currentTimeMillis();
+		while (t1 < System.currentTimeMillis() + value);
 	}
 
 }

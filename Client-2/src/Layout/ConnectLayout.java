@@ -1,6 +1,5 @@
-package Register;
-
-/*
+package Layout;/*
+	* Created on 21/06/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -23,10 +22,33 @@ package Register;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import External.Singleton;
 import javafx.scene.Scene;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
-interface Layout {
+public class ConnectLayout implements Layout {
 
-	Scene get();
+	static Thread sync;
+	static boolean failedStatus = false;
+	static String failedMessage;
+
+	public Scene get() {
+
+		GridPane grid = Singleton.getDefaultGridPane();
+
+		Text scenetitle = new Text("Connecting.");
+		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+		grid.add(scenetitle, 1, 0, 2, 1);
+
+		CheckConnection cc = new CheckConnection();
+		sync = new Thread(cc);
+		sync.start();
+
+		return new Scene(grid, 300, 275);
+	}
 
 }
+

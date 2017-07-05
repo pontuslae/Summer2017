@@ -25,6 +25,7 @@
 import Connection.GateServer;
 import Connection.Server;
 import External.Singleton;
+import Layout.ConnectLayout;
 
 import java.net.ConnectException;
 

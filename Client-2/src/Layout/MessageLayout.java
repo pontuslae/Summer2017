@@ -1,4 +1,4 @@
-/*
+package Layout;/*
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -51,7 +51,7 @@ public class MessageLayout implements Layout {
 	}
 
 	public Scene get(){
-		Singleton.debugPrint("Setting MessageLayout");
+		Singleton.debugPrint("Setting Layout.MessageLayout");
 
 		GridPane grid = Singleton.getDefaultGridPane();
 		grid = updateMessageDisplay(grid);

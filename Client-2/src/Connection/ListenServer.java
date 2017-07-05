@@ -1,4 +1,5 @@
-/*
+package Connection; /*
+	* Created on 05/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -21,10 +22,34 @@
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import javafx.scene.Scene;
+import External.Singleton;
+import Layout.MainLayout;
 
-interface Layout {
+public class ListenServer extends Thread { // TODO: 05/07/2017 Class.
+	/*
+	The Purpose of this class is to handle listening for receiving data in the background and make connection
+	with the server from time to time to make sure you are still conneted.
+	 */
 
-	Scene get();
+	private Server dataserver;
+	private static ListenServer single;
 
+	@Override
+	public void run() {
+		this.dataserver = DataServer.getInstance();
+		single = this;
+
+		while (!this.dataserver.socket.isClosed()) {     // While the socket is open.
+			if (single != this) break;                   // If there exists more than one instant of this. Kill it.
+			Singleton.debugPrint("Socket is not closed.");
+			Singleton.sleep(500);
+		}
+
+		Singleton.debugPrint("Socket is closed.");
+
+		// Notify the Server that it's dead. And the user.
+		Server.getInstance().socket = null; // If the socket is null it will attempt to reconnect it internally.
+		MainLayout.getInstance().gotoFailedLayout("Disconnected");
+
+	}
 }
