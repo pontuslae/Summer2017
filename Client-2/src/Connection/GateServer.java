@@ -35,6 +35,8 @@ public class GateServer extends Server {
 	public Server transfer() throws IOException {
 		Singleton.debugPrint("Transferring Servers");
 		this.socket.setSoTimeout(3000);
+
+		// TODO: 05/07/2017 This has been tested, but needs more verification on the client end.
 		String first = in.readLine();
 		String second = in.readLine();
 		Singleton.debugPrint("New Server: " + first + " " + second);

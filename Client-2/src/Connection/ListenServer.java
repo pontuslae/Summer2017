@@ -1,6 +1,5 @@
-package Register;
-
-/*
+package Connection; /*
+	* Created on 05/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
 	* Permission is hereby granted, free of charge, to any person obtaining
@@ -23,10 +22,17 @@ package Register;
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import javafx.scene.Scene;
+public class ListenServer extends Thread { // TODO: 05/07/2017 Class.
+	/*
+	The Purpose of this class is to handle listening for receiving data in the background and make connection
+	with the server from time to time to make sure you are still conneted.
+	 */
 
-interface Layout {
+	DataServer dataserver;
 
-	Scene get();
+	@Override
+	public void run() {
+		DataServer.getInstance();
 
+	}
 }

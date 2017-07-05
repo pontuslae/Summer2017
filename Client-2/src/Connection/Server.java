@@ -38,22 +38,31 @@ public class Server {
 	DataOutputStream out;               // An output stream that transmits data to another socket.
 	BufferedReader in;                  /* A buffered input reader that converts binaries to strings. -
 										   And gets information from the socket. */
+	static Server instance;
+
+	public static Server getInstance() {
+		return instance;
+	}
 
 	Server() {
 		si = new ServerInfo();
+		this.instance = this;
 	}
 
 	Server(ServerInfo si) {
 		this.si = si;
+		this.instance = this;
 	}
 
 	Server(ServerInfo si, Socket socket) {
 		this.si = si;
 		this.socket = socket;
+		this.instance = this;
 	}
 
 	Server(Socket socket) {
 		this.socket = socket;
+		this.instance = this;
 	}
 
 	/**
@@ -93,24 +102,26 @@ public class Server {
 		return this.read(150);
 	}
 
-	public String read(int nrbytes) throws IOException {
-		int[] recv = new int[nrbytes];
+	public String read(int nrBytes) throws IOException {
+		int[] recv = new int[nrBytes];
 
-		// O(N)
-		for (int i = 0; i < nrbytes; i++) {
-			int bte = this.in.read();
+		// TODO: 05/07/2017 Improve this algorithm.
+		// N = nrbytes
+		// O(N) * (O(N) + O(N)) = O(N^2)
 
-			if (bte == -1) {
-				return intArrayToString(Arrays.copyOf(recv, 0));
+		for (int i = 0; i < nrBytes; i++) {                     // Loop for the amount of bytes the user requests.
+			int bte = this.in.read();                           // Reads one integer from the socket.
+			if (bte == -1) {                                    // -1 indicates end of stream has been reached.
+				return intArrayToString(Arrays.copyOf(recv, 0));// Make a copy of the Array in the range that is filled.
 			}
-			recv[i] = this.in.read();
+			recv[i] = this.in.read();                           // Stores an integer in the array.
 		}
 
-		return intArrayToString(recv);
+		return intArrayToString(recv);// If the entire amount of nrBytes is full without end of stream Return all of it.
 	}
 
 	/**
-	 * Converts an integer array to a String of characters.
+	 * Converts an integer array to a String of characters. O(N) (Not including o(N) from String concat.
 	 * @param original the integer array
 	 * @return a String of characters from the integer values.
 	 */
