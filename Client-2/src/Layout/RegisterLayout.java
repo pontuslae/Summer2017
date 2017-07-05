@@ -1,4 +1,4 @@
-package Register;
+package Layout;
 
 /*
 	* Created on 03/07/2017.
@@ -25,6 +25,7 @@ package Register;
 */
 
 import External.Singleton;
+import Register.*;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -32,6 +33,8 @@ import javafx.scene.text.Text;
 
 public class RegisterLayout implements Layout {
 
+	public Scene get() {return null;}
+/*
 	public Scene get() {
 
 		GridPane grid = Singleton.getDefaultGridPane();
@@ -58,5 +61,6 @@ public class RegisterLayout implements Layout {
 
 
 	}
+	*/
 
 }

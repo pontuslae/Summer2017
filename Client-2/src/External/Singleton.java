@@ -39,9 +39,9 @@ public class Singleton {
 
 	public static void deny(){
 		try {
-			throw new Exception("Can't instantiate an empty MessageLayout");
+			throw new Exception("Can't instantiate an empty Layout.MessageLayout");
 		} catch (Exception ex) {
-			throw new Error("Can't instantiate an empty MessageLayout - Unable to throw Exception.");
+			throw new Error("Can't instantiate an empty Layout.MessageLayout - Unable to throw Exception.");
 		}
 	}
 

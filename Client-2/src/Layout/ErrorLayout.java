@@ -1,4 +1,4 @@
-/*
+package Layout;/*
 	* Created on 21/06/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
@@ -24,31 +24,45 @@
 
 import External.Singleton;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class ConnectLayout implements Layout {
+public class ErrorLayout implements Layout {
 
-	static Thread sync;
-	static boolean failedStatus = false;
-	static String failedMessage;
+	String error;
+
+	ErrorLayout() {}
+
+	ErrorLayout(String error){
+		this.error = error;
+	}
 
 	public Scene get() {
+		return get(0);
+	}
 
+	public Scene get(int errorCode) {
 		GridPane grid = Singleton.getDefaultGridPane();
 
-		Text scenetitle = new Text("Connecting.");
-		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 1, 0, 2, 1);
+		Text sceneTitle = new Text("Sorry, It's not working :(");
+		sceneTitle.setFont(Singleton.getDefaultFont());
+		grid.add(sceneTitle, 1, 0, 2, 1);
 
-		CheckConnection cc = new CheckConnection();
-		sync = new Thread(cc);
-		sync.start();
+		Text errorSubText = new Text(this.error);
+		errorSubText.setFont(Singleton.getDefaultFont(12));
+		grid.add(errorSubText, 1, 0, 2, 7);
+
+		Button goBack = new Button("Go Back");
+
+		goBack.setOnAction((event) -> {
+			Main.getInstance().gotoStartLayout();
+		});
+		goBack.isDefaultButton();
+
+		grid.add(goBack, 1, 0, 2, 15);
 
 		return new Scene(grid, 300, 275);
 	}
 
 }
-
