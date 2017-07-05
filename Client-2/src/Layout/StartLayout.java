@@ -31,6 +31,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+import static Connection.Server.DataServer.MOCK_STATUS;
+
 public class StartLayout implements Layout {
 
 	private TextField inputField;
@@ -40,7 +42,7 @@ public class StartLayout implements Layout {
 	public Scene get(){
 
 		// If we are using a mock server. Start it.
-		if (Connector.MOCK_STATUS){
+		if (MOCK_STATUS){
 			Thread itt = new IgnoreThisTCP();
 			itt.start();
 		}
@@ -64,7 +66,7 @@ public class StartLayout implements Layout {
 			if (validUserName(inputField.getText())){
 				Singleton.debugTransitionPrint("Layout.StartLayout", "Layout.MessageLayout");
 
-				Main.getInstance().gotoConnectLayout(inputField.getText());
+				MainLayout.getInstance().gotoConnectLayout(inputField.getText());
 			}
 		}
 	}
