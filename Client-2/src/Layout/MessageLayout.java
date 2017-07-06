@@ -23,7 +23,10 @@ package Layout;/*
 
 import External.Singleton;
 import Message.Message;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -39,6 +42,7 @@ public class MessageLayout implements Layout {
 	private TextField messageField;
 	private String userName = "";
 	private ScrollPane sp = new ScrollPane();
+	private Text person = new Text("Another person");
 
 	private ArrayList<Message> messages = new ArrayList<>();
 
@@ -51,16 +55,20 @@ public class MessageLayout implements Layout {
 	}
 
 	public Scene get(){
-		Singleton.debugPrint("Setting Layout.MessageLayout");
+		Singleton.debugPrint("Setting MessageLayout");
 
-		GridPane grid = Singleton.getDefaultGridPane();
+		GridPane grid = Singleton.getDefaultGridPane(5);
 		grid = updateMessageDisplay(grid);
+		grid = getLeftSide(grid);
 
+		grid.add(person, 14, 0);
 		messageField = new TextField();
-		grid.add(messageField, 1, 24);
+		grid.add(messageField, 7, 43, 15, 4);
 		messageField.addEventFilter(KeyEvent.KEY_TYPED, this::sendMessage);
 
-		return new Scene(grid, 600, 275);
+
+
+		return new Scene(grid, 600, 289);
 	}
 
 	private void sendMessage(KeyEvent e){
@@ -113,7 +121,26 @@ public class MessageLayout implements Layout {
 		Text scenetitle = new Text(t);
 		scenetitle.setFont(Singleton.getDefaultFont());
 		sp.setContent(scenetitle);
-		grid.add(sp, 0, 0, 5, 24);
+		grid.add(sp, 7, 1, 15, 41);
+		Text con = new Text("Connected status");
+		con.setFont(Singleton.getDefaultFont(11));
+		grid.add(con, 17, 42);
+		return grid;
+	}
+
+	private GridPane getLeftSide(GridPane grid) {
+
+		Text helpText1 = new Text("Online users");
+		ListView<String> list = new ListView<>();
+		ObservableList<String> items = FXCollections.observableArrayList (
+				"Single", "Double", "Suite", "Family App");
+		list.setItems(items);
+		list.setPrefWidth(50);
+		list.setPrefHeight(280);
+		list.setBackground(null);
+
+		grid.add(helpText1, 0, 0);
+		grid.add(list, 0, 1, 7, 46);
 		return grid;
 	}
 }

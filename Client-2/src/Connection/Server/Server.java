@@ -67,6 +67,14 @@ public class Server extends Thread {
 		this.instance = this;
 	}
 
+	public ServerInfo getServerInfo() {
+		return this.si;
+	}
+
+	public void setServerInfo(ServerInfo serverInfo) {
+		this.si = serverInfo;
+	}
+
 	public Socket getSocket() {
 		return this.socket;
 	}
@@ -93,7 +101,7 @@ public class Server extends Thread {
 	 * Before interacting with the socket, make sure it works, otherwise throw an exception.
 	 * @throws Exception inherited from the connect() method.
 	 */
-	private void verifySocket() throws Exception {
+	void verifySocket() throws Exception {
 		if (this.socket == null) {
 			this.connect();
 		} else if (!this.socket.isConnected()) {

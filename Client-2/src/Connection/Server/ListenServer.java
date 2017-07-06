@@ -1,4 +1,4 @@
-package Connection; /*
+package Connection.Server; /*
 	* Created on 05/07/2017.
 	* Copyright (c) 2017 Pontus Laestadius
 	*
@@ -22,8 +22,6 @@ package Connection; /*
 	* WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-import Connection.Server.DataServer;
-import Connection.Server.Server;
 import External.Singleton;
 import Layout.MainLayout;
 

@@ -25,7 +25,9 @@ package External;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -58,12 +60,17 @@ public class Singleton {
 	}
 
 	public static GridPane getDefaultGridPane(){
+		return getDefaultGridPane(10);
+	}
+
+	public static GridPane getDefaultGridPane(int gap){
 		GridPane grid = new GridPane();
-		grid.setAlignment(Pos.CENTER);
-		grid.setHgap(10);
-		grid.setVgap(10);
-		int pad = 5;
+		grid.setAlignment(Pos.TOP_LEFT);
+		grid.setHgap(gap);
+		grid.setVgap(gap);
+		int pad = 0;
 		grid.setPadding(new Insets(pad,pad,pad,pad));
+		grid.setBackground(Background.EMPTY);
 		return grid;
 	}
 

@@ -24,8 +24,8 @@ package Message;/*
 import User.User;
 
 public class Message {
-	private User poster;        // The person who sent the message
-	private long time;          // The unix time when the message was sent.
+	private User poster;                // The person who sent the message
+	private Long time;                  // The unix time when the message was sent.
 	private MessageContent message;     // The contents of the message.
 
 	public Message(String poster, Object message, long time){
@@ -39,25 +39,19 @@ public class Message {
 		this.message = new MessageContent(message);
 
 		// We only care about minutes and larger numbers.
-		this.time = System.currentTimeMillis()/(1000*60);
 	}
 
 	@Override
 	public String toString() {
-		return this.getDate() + " | " + this.poster + ": " + this.message;
+		return this.getTime() + " | " + this.poster.getUsername() + ": " + this.message;
 	}
 
-	private String getDate() {
-
-		// We only care about minutes and larger numbers.
-		long currentDate = System.currentTimeMillis()/(1000*60);
-
-
-		// TODO: 02/07/2017 This math.
-		long pastMinutes = this.time % 60;
-		long pastHour = this.time % (60);
-
-
-		return "1969";
+	private String getTime() {
+		if (this.time == null) {
+			return "     ";
+		}
+		return this.time + "";
 	}
+
+
 }

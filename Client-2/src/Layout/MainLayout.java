@@ -34,11 +34,8 @@ import javafx.stage.Stage;
 public class MainLayout extends Application {
 
 	private Stage stage;
-
 	private static Server server;
-
 	private static MainLayout instance;
-
 	private PrivateUser user;
 
 	public MainLayout() {
