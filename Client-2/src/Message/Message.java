@@ -44,7 +44,7 @@ public class Message {
 
 	@Override
 	public String toString() {
-		return this.getDate() + " | " + this.poster + ": " + this.message;
+		return this.getDate() + " | " + this.poster.getUsername() + ": " + this.message;
 	}
 
 	private String getDate() {
@@ -54,10 +54,9 @@ public class Message {
 
 
 		// TODO: 02/07/2017 This math.
-		long pastMinutes = this.time % 60;
-		long pastHour = this.time % (60);
+		long pastMinutes = this.time % (60*60);
+		long pastHour = this.time % (60 * 60);
 
-
-		return "1969";
+		return pastHour + ":" + pastMinutes;
 	}
 }

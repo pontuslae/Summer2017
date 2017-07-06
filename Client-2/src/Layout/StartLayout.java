@@ -49,14 +49,15 @@ public class StartLayout implements Layout {
 
 		GridPane grid = Singleton.getDefaultGridPane();
 
-		Text scenetitle = new Text("Welcome");
+		Text scenetitle = new Text("      Welcome");
 		scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-		grid.add(scenetitle, 1, 0, 2, 1);
+		grid.add(scenetitle, 4, 4, 2, 1);
 
 		inputField = new TextField();
-		grid.add(inputField, 1, 1);
+		inputField.setPrefWidth(160);
+		grid.add(inputField, 4, 5);
 		inputField.addEventFilter(KeyEvent.KEY_TYPED, this::inputFieldListener);
-		Scene start = new Scene(grid, 300, 275);
+		Scene start = new Scene(grid, 240, 270);
 
 		return start;
 	}
@@ -66,7 +67,11 @@ public class StartLayout implements Layout {
 			if (validUserName(inputField.getText())){
 				Singleton.debugTransitionPrint("Layout.StartLayout", "Layout.MessageLayout");
 
-				MainLayout.getInstance().gotoConnectLayout(inputField.getText());
+				if (inputField.getText().equals("pontus")) // TODO: 05/07/2017 this should be removed  later.
+				{
+					MainLayout.getInstance().gotoMessageLayout(inputField.getText());
+				} else
+					MainLayout.getInstance().gotoConnectLayout(inputField.getText());
 			}
 		}
 	}

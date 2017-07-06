@@ -35,6 +35,14 @@ public class DataServer extends Server {
 	private static final int OK_INDICATOR = 1;
 	public static final boolean MOCK_STATUS = false; // Changer this depending on if you are mocking or not.
 
+	ListenServer listenserver;
+
+	public DataServer(ServerInfo si) {
+		listenserver = new ListenServer();
+		listenserver.start();
+		this.setServerInfo(si);
+	}
+
 	/**
 	 * Looks for a response from the server to confirm the message has been sent.
 	 */

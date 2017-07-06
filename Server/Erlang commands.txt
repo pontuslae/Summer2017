@@ -1,8 +1,5 @@
 cd("C:/users/pontu/summer2017/server/").
 
-
 compile:file(director).
 
-
 c(director).
-

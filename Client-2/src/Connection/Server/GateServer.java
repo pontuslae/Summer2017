@@ -34,7 +34,9 @@ public class GateServer extends Server {
 		try {
 			MainLayout.setServer(transfer());
 		} catch (IOException ex) {
-			MainLayout.getInstance().gotoFailedLayout("Couldn't find a server.");
+			MainLayout.getInstance().gotoFailedLayout("No Response from server.");
+		} catch (Exception ex) {
+			MainLayout.getInstance().gotoFailedLayout("Couldn't find a server. Connection Error");
 		}
 	}
 
@@ -42,7 +44,8 @@ public class GateServer extends Server {
 	 * @return a new server where the data should be sent.
 	 * @throws IOException If the input streams are dead.
 	 */
-	public Server transfer() throws IOException {
+	public Server transfer() throws Exception {
+		this.verifySocket();
 		Singleton.debugPrint("Transferring Servers");
 		this.socket.setSoTimeout(3000);
 
@@ -50,6 +53,7 @@ public class GateServer extends Server {
 		String first = this.getIn().readLine();
 		String second = this.getIn().readLine();
 		Singleton.debugPrint("New Server: " + first + " " + second);
+		this.close();
 
 		return new Server(new ServerInfo(first, Integer.parseInt(second)));
 	}
